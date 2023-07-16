@@ -10,4 +10,6 @@ window.geometry("1920x1080")
 window.resizable(False, False)
 window.configure(background="black")
 
+print("WINDOW STARTED")
+
 window.mainloop()
