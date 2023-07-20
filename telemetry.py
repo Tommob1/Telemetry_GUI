@@ -23,6 +23,7 @@ class   TelemetryInterface:
         self.velocity_label.pack()
 
         self.fuel_label1 = tk.Label(window, fg="white", bg="black", font=("Helvetica", 16))
+        self.fuel_label1.pack()
 
         #Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
@@ -34,8 +35,8 @@ class   TelemetryInterface:
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
-            altitude = 100 * elapsed_percent  # Altitude increases from 0 to 100,000
-            velocity = 5000 * elapsed_percent  # Velocity increases from 0 to 5,000
+            altitude = 100 * elapsed_percent  # Altitude increases from 0 to 100
+            velocity = 5000 * elapsed_percent  # Velocity increases from 0 to 5000
             fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
 
             # Update the labels with the new data
