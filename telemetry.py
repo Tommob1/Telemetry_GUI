@@ -29,18 +29,21 @@ class   TelemetryInterface:
 
     def update_telemetry_data(self):
         simulation_time = time.time()
-        while time.time() - simulation_time <= 60: # Run sim for 1 minute
-            # Altitude, Velocity and stage 1 fuel simulated data
-            altitude = random.uniform(0, 100)
-            velocity = random.uniform(0, 5000)
-            fuel = max(100 - ((time.time() - simulation_time) / 60 * 100), 0) # Fuel decrease over simulation time
+        while time.time() - simulation_time <= 60:  # Run for 1 minute
+            elapsed_time = time.time() - simulation_time
+            elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
-            # Update labels with simulated data
+            # Calculate altitude, velocity and fuel data based on the elapsed time
+            altitude = 100 * elapsed_percent  # Altitude increases from 0 to 100,000
+            velocity = 5000 * elapsed_percent  # Velocity increases from 0 to 5,000
+            fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
+
+            # Update the labels with the new data
             self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
             self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
             self.fuel_label1.config(text="Fuel: %.2f%%" % fuel)
 
-            # Update buffer
+            # Wait for 0.1 second before updating again
             time.sleep(0.1)
 
         print("SIMULATION FINISHED")
