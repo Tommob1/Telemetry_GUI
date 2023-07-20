@@ -4,6 +4,7 @@
 import tkinter as tk
 from PIL import ImageTk, Image
 
+
 window = tk.Tk()
 window.title("Simulated Telemetry UI")
 window.geometry("1920x1080")
