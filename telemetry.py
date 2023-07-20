@@ -27,6 +27,25 @@ class   TelemetryInterface:
         #Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
+    def update_telemetry_data(self):
+        simulation_time = time.time()
+        while time.time() - simulation_time <= 60: # Run sim for 1 minute
+            # Altitude, Velocity and stage 1 fuel simulated data
+            altitude = random.uniform(0, 100)
+            velocity = random.uniform(0, 5000)
+            fuel = max(100 - ((time.time() - simulation_time) / 60 * 100), 0) # Fuel decrease over simulation time
+
+            # Update labels with simulated data
+            self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
+            self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
+            self.fuel_label1.config(text="Fuel: %.2f%%" % fuel)
+
+            # Update buffer
+            time.sleep(0.1)
+
+        print("SIMULATION FINISHED")
+
 window = tk.Tk()
 print("WINDOW STARTED")
+app = TelemetryInterface(window)
 window.mainloop()
