@@ -2,8 +2,6 @@
 # Started 16-07-2023
 
 import tkinter as tk
-from PIL import ImageTk, Image
-import random
 import threading
 import time
 
@@ -30,9 +28,9 @@ class   TelemetryInterface:
 
     def update_telemetry_data(self):
         simulation_time = time.time()
-        while time.time() - simulation_time <= 60:  # Run for 1 minute
+        while time.time() - simulation_time <= 240:  # Run for 4 minutes
             elapsed_time = time.time() - simulation_time
-            elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
+            elapsed_percent = elapsed_time / 240  # Percentage of the launch time that has elapsed
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
             altitude = 100 * elapsed_percent  # Altitude increases from 0 to 100
