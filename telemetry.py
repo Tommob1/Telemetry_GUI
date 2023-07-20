@@ -16,7 +16,16 @@ class   TelemetryInterface:
         self.window.configure(background="black")
 
         # Telemetry Data Labels
-        
+        self.altitude_label = tk.Label(window, fg="white", bg="black", font=("Helvetica", 16))
+        self.altitude_label.pack()
+
+        self.velocity_label = tk.Label(window, fg="white", bg="black", font=("Helvetica", 16))
+        self.velocity_label.pack()
+
+        self.fuel_label1 = tk.Label(window, fg="white", bg="black", font=("Helvetica", 16))
+
+        #Update function launched in a new thread
+        threading.Thread(target=self.update_telemetry_data).start()
 
 window = tk.Tk()
 print("WINDOW STARTED")
