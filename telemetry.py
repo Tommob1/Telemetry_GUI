@@ -23,6 +23,9 @@ class   TelemetryInterface:
         self.fuel_label1 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
         self.fuel_label1.pack()
 
+        self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
+        self.fuel_label2.pack()
+
         #Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
@@ -40,7 +43,8 @@ class   TelemetryInterface:
             # Update the labels with the new data
             self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
             self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
-            self.fuel_label1.config(text="Fuel: %.2f%%" % fuel)
+            self.fuel_label1.config(text="Stage 1 Fuel: %.2f%%" % fuel)
+            self.fuel_label2.config(text="Stage 2 Fuel: 100%")
 
             # Wait for 0.1 second before updating again
             time.sleep(0.1)
