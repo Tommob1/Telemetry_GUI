@@ -1,15 +1,14 @@
-# Telemetry User-Interface for ELA internship
-# Started 16-07-2023
-
 import tkinter as tk
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import threading
 import time
 
-class   TelemetryInterface:
+class TelemetryInterface:
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
-        self.window.geometry("520x620")
+        self.window.geometry("800x800")
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
@@ -29,7 +28,38 @@ class   TelemetryInterface:
         self.staging_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 23))
         self.staging_label.pack()
 
-        #Update function launched in a new thread
+        # Telemetry Data Graphs
+        self.fig = Figure(figsize=(6, 6), dpi=100)
+        self.altitude_graph = self.fig.add_subplot(311)
+        self.velocity_graph = self.fig.add_subplot(312)
+        self.fuel_graph = self.fig.add_subplot(313)
+
+        self.altitude_graph.set_facecolor('black')
+        self.velocity_graph.set_facecolor('black')
+        self.fuel_graph.set_facecolor('black')
+
+        self.altitude_graph.set_title('Altitude vs Time', color='green')
+        self.velocity_graph.set_title('Velocity vs Time', color='green')
+        self.fuel_graph.set_title('Fuel vs Time', color='green')
+
+        self.altitude_graph.tick_params(colors='green', grid_color='green')
+        self.velocity_graph.tick_params(colors='green', grid_color='green')
+        self.fuel_graph.tick_params(colors='green', grid_color='green')
+
+        self.fig.subplots_adjust(hspace=0.5)
+        self.fig.patch.set_facecolor('black')
+
+        self.canvas = FigureCanvasTkAgg(self.fig, master=window)  
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
+
+        # Time and data lists
+        self.times = []
+        self.altitudes = []
+        self.velocities = []
+        self.fuels = []
+
+        # Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
     def update_telemetry_data(self):
@@ -49,8 +79,32 @@ class   TelemetryInterface:
             self.fuel_label1.config(text="Stage 1 Fuel: %.2f%%" % fuel)
             self.fuel_label2.config(text="Stage 2 Fuel: 100%")
 
+            # Append the new data to the lists
+            self.times.append(elapsed_time)
+            self.altitudes.append(altitude)
+            self.velocities.append(velocity)
+            self.fuels.append(fuel)
+
+            # Plot the new data
+            self.altitude_graph.clear()
+            self.altitude_graph.plot(self.times, self.altitudes, 'g')
+            self.altitude_graph.set_xlim(0, 240)
+            self.altitude_graph.set_ylim(0, 100)
+
+            self.velocity_graph.clear()
+            self.velocity_graph.plot(self.times, self.velocities, 'g')
+            self.velocity_graph.set_xlim(0, 240)
+            self.velocity_graph.set_ylim(0, 5000)
+
+            self.fuel_graph.clear()
+            self.fuel_graph.plot(self.times, self.fuels, 'g')
+            self.fuel_graph.set_xlim(0, 240)
+            self.fuel_graph.set_ylim(0, 100)
+
+            self.canvas.draw()
+
             # Wait for 0.1 second before updating again
-            time.sleep(0.1)
+            time.sleep(0.01)
 
         print("SIMULATION FINISHED")
         self.staging_label.config(text="STAGE SEPERATION CONFIRMED")
