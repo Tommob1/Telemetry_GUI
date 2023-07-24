@@ -9,7 +9,7 @@ class   TelemetryInterface:
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
-        self.window.geometry("480x620")
+        self.window.geometry("520x620")
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
@@ -26,7 +26,7 @@ class   TelemetryInterface:
         self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
         self.fuel_label2.pack()
 
-        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 30))
+        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 23))
         self.staging_label.pack()
 
         #Update function launched in a new thread
