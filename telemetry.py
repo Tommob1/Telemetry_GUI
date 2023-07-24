@@ -26,6 +26,9 @@ class   TelemetryInterface:
         self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
         self.fuel_label2.pack()
 
+        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 30))
+        self.staging_label.pack()
+
         #Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
@@ -50,6 +53,7 @@ class   TelemetryInterface:
             time.sleep(0.1)
 
         print("SIMULATION FINISHED")
+        self.staging_label.config(text="STAGE SEPERATION CONFIRMED")
 
 window = tk.Tk()
 print("WINDOW STARTED")
