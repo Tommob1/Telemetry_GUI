@@ -14,19 +14,19 @@ class TelemetryInterface:
         self.window.configure(background="black")
 
         # Telemetry Data Labels
-        self.altitude_label = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
+        self.altitude_label = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.altitude_label.pack()
 
-        self.velocity_label = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
+        self.velocity_label = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.velocity_label.pack()
 
-        self.fuel_label1 = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
+        self.fuel_label1 = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.fuel_label1.pack()
 
-        self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
+        self.fuel_label2 = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.fuel_label2.pack()
 
-        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Courier", 23))
+        self.staging_label = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 23))
         self.staging_label.pack()
 
         # Telemetry Data Graphs
@@ -39,13 +39,13 @@ class TelemetryInterface:
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
 
-        self.altitude_graph.set_title('Altitude vs Time', color='green')
-        self.velocity_graph.set_title('Velocity vs Time', color='green')
-        self.fuel_graph.set_title('Fuel vs Time', color='green')
+        self.altitude_graph.set_title('Altitude vs Time', color='#00FF00')
+        self.velocity_graph.set_title('Velocity vs Time', color='#00FF00')
+        self.fuel_graph.set_title('Fuel vs Time', color='#00FF00')
 
-        self.altitude_graph.tick_params(colors='green', grid_color='green')
-        self.velocity_graph.tick_params(colors='green', grid_color='green')
-        self.fuel_graph.tick_params(colors='green', grid_color='green')
+        self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
+        self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
+        self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
 
         self.fig.subplots_adjust(hspace=0.5)
         self.fig.patch.set_facecolor('black')
@@ -65,13 +65,16 @@ class TelemetryInterface:
 
     def update_telemetry_data(self):
         simulation_time = time.time()
-        while time.time() - simulation_time <= 240:  # Run for 4 minutes
+        while time.time() - simulation_time <= 60:  # Run for 4 minutes
             elapsed_time = time.time() - simulation_time
-            elapsed_percent = elapsed_time / 240  # Percentage of the launch time that has elapsed
+            elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
+
+            altitude_growth_factor = 0.1
+            velocity_growth_factor = 0.02
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
-            altitude = 100 * elapsed_percent  # Altitude increases from 0 to 100
-            velocity = 5000 * elapsed_percent  # Velocity increases from 0 to 5000
+            altitude = 100 * (1 - math.exp(-altitude_growth_factor * elapsed_time))  # Altitude increases from 0 to 100
+            velocity = 5000 * (1 - math.exp(-velocity_growth_factor * elapsed_time))  # Velocity increases from 0 to 5000
             fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
 
             # Update the labels with the new data
@@ -89,23 +92,23 @@ class TelemetryInterface:
             # Plot the new data
             self.altitude_graph.clear()
             self.altitude_graph.plot(self.times, self.altitudes, 'g')
-            self.altitude_graph.set_xlim(0, 240)
+            self.altitude_graph.set_xlim(0, 60)
             self.altitude_graph.set_ylim(0, 100)
 
             self.velocity_graph.clear()
             self.velocity_graph.plot(self.times, self.velocities, 'g')
-            self.velocity_graph.set_xlim(0, 240)
+            self.velocity_graph.set_xlim(0, 60)
             self.velocity_graph.set_ylim(0, 5000)
 
             self.fuel_graph.clear()
             self.fuel_graph.plot(self.times, self.fuels, 'g')
-            self.fuel_graph.set_xlim(0, 240)
+            self.fuel_graph.set_xlim(0, 60)
             self.fuel_graph.set_ylim(0, 100)
 
             self.canvas.draw()
 
             # Wait for 0.1 second before updating again
-            time.sleep(0.05)
+            time.sleep(0.01)
 
         print("SIMULATION FINISHED")
         self.staging_label.config(text="STAGE SEPERATION CONFIRMED")
