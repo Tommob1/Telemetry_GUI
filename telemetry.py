@@ -69,8 +69,8 @@ class TelemetryInterface:
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
-            altitude_growth_factor = 0.1
-            velocity_growth_factor = 0.02
+            altitude_growth_factor = 0.15
+            velocity_growth_factor = 0.15
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
             altitude = 100 * (1 - math.exp(-altitude_growth_factor * elapsed_time))  # Altitude increases from 0 to 100
