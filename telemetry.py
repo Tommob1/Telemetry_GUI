@@ -13,19 +13,19 @@ class TelemetryInterface:
         self.window.configure(background="black")
 
         # Telemetry Data Labels
-        self.altitude_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
+        self.altitude_label = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
         self.altitude_label.pack()
 
-        self.velocity_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
+        self.velocity_label = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
         self.velocity_label.pack()
 
-        self.fuel_label1 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
+        self.fuel_label1 = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
         self.fuel_label1.pack()
 
-        self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Helvetica", 20))
+        self.fuel_label2 = tk.Label(window, fg="green", bg="black", font=("Courier", 20))
         self.fuel_label2.pack()
 
-        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Helvetica", 23))
+        self.staging_label = tk.Label(window, fg="green", bg="black", font=("Courier", 23))
         self.staging_label.pack()
 
         # Telemetry Data Graphs
