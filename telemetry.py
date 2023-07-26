@@ -110,7 +110,7 @@ class TelemetryInterface:
             # Wait for 0.1 second before updating again
             time.sleep(0.01)
 
-        print("SIMULATION FINISHED")
+        print("SIMULATION COMPLETE")
         self.staging_label.config(text="STAGE SEPERATION CONFIRMED")
 
 window = tk.Tk()
