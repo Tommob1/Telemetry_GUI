@@ -6,6 +6,7 @@ import time
 import math
 
 class TelemetryInterface:
+    
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
