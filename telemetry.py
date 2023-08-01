@@ -1,6 +1,8 @@
+import os
 import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from PIL import ImageTk, Image
 import threading
 import time
 import math
@@ -69,17 +71,17 @@ class TelemetryInterface:
         script_dir = os.path.dirname(os.path.realpath(__file__))
     
         logo_path = os.path.join(script_dir, 'ela_ogo.png')
-        logo = Image.open(logo2_path)
+        logo = Image.open(logo_path)
 
         width = 481
         height = 312
 
         logo = logo.resize((width, height), Image.LANCZOS)
-        logo_image = ImageTk.PhotoImage(logo2)
+        logo_image = ImageTk.PhotoImage(logo)
 
         global logo_label
-        logo_label = tk.Label(image=logo2_image, borderwidth=0)
-        logo_label.image = logo2_image
+        logo_label = tk.Label(image=logo_image, borderwidth=0)
+        logo_label.image = logo_image
 
     def update_telemetry_data(self):
         simulation_time = time.time()
