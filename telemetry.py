@@ -64,6 +64,23 @@ class TelemetryInterface:
         # Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
+    def logo():
+        # Get the directory of this script
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+    
+        logo_path = os.path.join(script_dir, 'ela_ogo.png')
+        logo = Image.open(logo2_path)
+
+        width = 481
+        height = 312
+
+        logo = logo.resize((width, height), Image.LANCZOS)
+        logo_image = ImageTk.PhotoImage(logo2)
+
+        global logo_label
+        logo_label = tk.Label(image=logo2_image, borderwidth=0)
+        logo_label.image = logo2_image
+
     def update_telemetry_data(self):
         simulation_time = time.time()
         while time.time() - simulation_time <= 60:  # Run for 4 minutes
