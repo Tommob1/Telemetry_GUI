@@ -16,6 +16,9 @@ class TelemetryInterface:
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
+        # Display logo
+        self.logo()
+
         # Telemetry Data Labels
         self.altitude_label = tk.Label(window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.altitude_label.pack()
@@ -66,11 +69,11 @@ class TelemetryInterface:
         # Update function launched in a new thread
         threading.Thread(target=self.update_telemetry_data).start()
 
-    def logo():
+    def logo(self):
         # Get the directory of this script
         script_dir = os.path.dirname(os.path.realpath(__file__))
     
-        logo_path = os.path.join(script_dir, 'ela_ogo.png')
+        logo_path = os.path.join(script_dir, 'ela_logo.png')
         logo = Image.open(logo_path)
 
         width = 481
@@ -79,9 +82,9 @@ class TelemetryInterface:
         logo = logo.resize((width, height), Image.LANCZOS)
         logo_image = ImageTk.PhotoImage(logo)
 
-        global logo_label
-        logo_label = tk.Label(image=logo_image, borderwidth=0)
-        logo_label.image = logo_image
+        self.logo_label = tk.Label(self.window, image=logo_image, borderwidth=0, bg="black")
+        self.logo_label.image = logo_image
+        self.logo_label.pack()
 
     def update_telemetry_data(self):
         simulation_time = time.time()
