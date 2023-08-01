@@ -23,7 +23,7 @@ class TelemetryInterface:
     def logo(self):
         # Get the directory of this script
         script_dir = os.path.dirname(os.path.realpath(__file__))
-    
+
         logo_path = os.path.join(script_dir, 'ela_logo.png')
         logo = Image.open(logo_path)
 
@@ -35,11 +35,18 @@ class TelemetryInterface:
 
         self.logo_label = tk.Label(self.window, image=logo_image, borderwidth=0, bg="black")
         self.logo_label.image = logo_image
-        self.logo_label.pack()
+
+        # Center the label in the window
+        self.logo_label.grid(row=0, column=0, sticky='nsew')
+
+        # Make the cell span across the entire window
+        self.window.grid_columnconfigure(0, weight=1)
+        self.window.grid_rowconfigure(0, weight=1)
+
 
     def init_simulation(self):
         # Remove logo
-        self.logo_label.pack_forget()
+        self.logo_label.grid_remove()
 
         # Telemetry Data Labels
         self.altitude_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
