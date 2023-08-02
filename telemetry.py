@@ -11,7 +11,7 @@ class TelemetryInterface:
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
-        self.window.geometry("1920x1080")
+        self.window.geometry("800x800")
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
@@ -143,6 +143,11 @@ class TelemetryInterface:
         self.fuel_graph.set_ylim(0, 100)
 
         self.canvas.draw()
+
+        self.times.append(time.time())
+        self.altitudes.append(altitude)
+        self.velocities.append(velocity)
+        self.fuels.append(fuel)
 
 
 window = tk.Tk()
