@@ -12,7 +12,7 @@ class TelemetryInterface:
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
-        self.window.geometry("800x800")
+        self.window.geometry("1920x1080")
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
