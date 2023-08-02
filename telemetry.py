@@ -96,11 +96,10 @@ class TelemetryInterface:
         self.fuels = []
 
         # Update function launched in a new thread
-        threading.Thread(target=self.update_telemetry_data).start()
+        self.window.after(0, lambda: self.update_telemetry_data(time.time()))
 
-    def update_telemetry_data(self):
-        simulation_time = time.time()
-        while time.time() - simulation_time <= 60:  # Run for 4 minutes
+    def update_telemetry_data(self, simulation_time):
+        if time.time() - simulation_time <= 60:  # Run for 4 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
@@ -112,20 +111,14 @@ class TelemetryInterface:
             velocity = 5000 * (1 - math.exp(-velocity_growth_factor * elapsed_time))  # Velocity increases from 0 to 5000
             fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
 
-            # Append the new data to the lists
-            self.times.append(elapsed_time)
-            self.altitudes.append(altitude)
-            self.velocities.append(velocity)
-            self.fuels.append(fuel)
-
-            # Schedule the UI update in the main thread
-            self.window.after(0, self.update_ui, altitude, velocity, fuel)
-
-            # Wait for 0.1 second before updating again
-            time.sleep(0.1)
-
-        self.window.after(0, self.staging_label.config, {"text":"STAGE SEPERATION CONFIRMED"})
-        print("SIMULATION COMPLETE")
+			# Update the UI
+            self.update_ui(altitude, velocity, fuel)
+            
+			# Schedule the next update
+            self.window.after(100, lambda: self.update_telemetry_data(simulation_time))
+        else:
+            self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
+            print("SIMULATION COMPLETE")
 
     def update_ui(self, altitude, velocity, fuel):
         # Update the labels with the new data
