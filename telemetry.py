@@ -94,8 +94,10 @@ class TelemetryInterface:
         self.velocities = []
         self.fuels = []
 
+        self.simulation_start_time = time.time() # Stores the simulation start time
+
         # Update function launched in a new thread
-        self.window.after(0, lambda: self.update_telemetry_data(time.time()))
+        self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
 
     def update_telemetry_data(self, simulation_time):
         if time.time() - simulation_time <= 60:  # Run for 4 minutes
@@ -120,6 +122,12 @@ class TelemetryInterface:
             print("SIMULATION COMPLETE")
 
     def update_ui(self, altitude, velocity, fuel):
+        # Append the new data to the lists
+        self.times.append(time.time() - self.simulation_start_time) # Using the simulation start time to get relative time
+        self.altitudes.append(altitude)
+        self.velocities.append(velocity)
+        self.fuels.append(fuel)
+
         # Update the labels with the new data
         self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
         self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
@@ -143,12 +151,6 @@ class TelemetryInterface:
         self.fuel_graph.set_ylim(0, 100)
 
         self.canvas.draw()
-
-        self.times.append(time.time())
-        self.altitudes.append(altitude)
-        self.velocities.append(velocity)
-        self.fuels.append(fuel)
-
 
 window = tk.Tk()
 print("WINDOW STARTED")
