@@ -18,6 +18,12 @@ class TelemetryInterface:
         # Display logo
         self.logo()
         self.window.after(5000, self.init_simulation)
+        print("""███████╗██╗      █████╗ 
+██╔════╝██║     ██╔══██╗
+█████╗  ██║     ███████║
+██╔══╝  ██║     ██╔══██║
+███████╗███████╗██║  ██║
+╚══════╝╚══════╝╚═╝  ╚═╝""")
 
     def logo(self):
         # Get the directory of this script
