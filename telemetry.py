@@ -11,7 +11,7 @@ class TelemetryInterface:
     def __init__(self, window):
         self.window = window
         self.window.title("Simulated Telemetry UI")
-        self.window.geometry("800x800")
+        self.window.geometry("1920x1080")
         self.window.resizable(False, False)
         self.window.configure(background="black")
 
@@ -141,7 +141,7 @@ class TelemetryInterface:
         self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
 
     def update_telemetry_data(self, simulation_time):
-        if time.time() - simulation_time <= 60:  # Run for 4 minutes
+        if time.time() - simulation_time <= 60:  # Run for 1 minute
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
