@@ -114,6 +114,7 @@ class TelemetryInterface:
             velocity_growth_factor = 0.15
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
+            #SIMULATED ALTITUDE AND VELOCITY RUN EXPONETIALLY SLOWER. CHANGE TO BE EXPONETIALLY FASTER
             altitude = 100 * (1 - math.exp(-altitude_growth_factor * elapsed_time))  # Altitude increases from 0 to 100
             velocity = 5000 * (1 - math.exp(-velocity_growth_factor * elapsed_time))  # Velocity increases from 0 to 5000
             fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
