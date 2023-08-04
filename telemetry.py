@@ -68,7 +68,7 @@ class TelemetryInterface:
 
         self.staging_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 23))
         self.staging_label.pack()
-        
+
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
         self.altitude_graph = self.fig.add_subplot(311)
@@ -112,8 +112,6 @@ class TelemetryInterface:
 
             altitude_growth_factor = 0.02
             velocity_growth_factor = 0.02
-            altitude_max = 100
-            velocity_max = 5000
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
             #SIMULATED ALTITUDE AND VELOCITY RUN EXPONETIALLY SLOWER. CHANGE TO BE EXPONETIALLY FASTER
