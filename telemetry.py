@@ -54,30 +54,21 @@ class TelemetryInterface:
         self.logo_label.grid_remove()
 
         # Telemetry Data Labels
-        self.altitude_frame = tk.Frame(self.window, bg="black")
-        self.altitude_frame.grid(row=0, column=0)
-        self.altitude_label = tk.Label(self.altitude_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.altitude_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.altitude_label.pack()
 
-        self.velocity_frame = tk.Frame(self.window, bg="black")
-        self.velocity_frame.grid(row=0, column=1)
-        self.velocity_label = tk.Label(self.velocity_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.velocity_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.velocity_label.pack()
 
-        self.fuel_frame1 = tk.Frame(self.window, bg="black")
-        self.fuel_frame1.grid(row=1, column=0)
-        self.fuel_label1 = tk.Label(self.fuel_frame1, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.fuel_label1 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.fuel_label1.pack()
 
-        self.fuel_frame2 = tk.Frame(self.window, bg="black")
-        self.fuel_frame2.grid(row=1, column=1)
-        self.fuel_label2 = tk.Label(self.fuel_frame2, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.fuel_label2 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
         self.fuel_label2.pack()
 
-        self.staging_frame = tk.Frame(self.window, bg="black")
-        self.staging_frame.grid(row=2, column=0, columnspan=2)
-        self.staging_label = tk.Label(self.staging_frame, fg="#00FF00", bg="black", font=("Courier", 23))
+        self.staging_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 23))
         self.staging_label.pack()
+
         
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
