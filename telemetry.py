@@ -50,24 +50,59 @@ class TelemetryInterface:
 
 
     def init_simulation(self):
-        # Remove logo
+       # Remove logo
         self.logo_label.grid_remove()
 
-        # Telemetry Data Labels
-        self.altitude_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.altitude_label.pack()
+        # Altitude frame
+        altitude_frame = tk.Frame(self.window, bg="black")
+        altitude_frame.pack(side=tk.TOP, fill=tk.BOTH)
 
-        self.velocity_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.velocity_label.pack()
+        self.altitude_label = tk.Label(altitude_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.altitude_label.pack(side=tk.TOP)
 
-        self.fuel_label1 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label1.pack()
+        self.altitude_fig = Figure(figsize=(6, 2), dpi=100)
+        self.altitude_graph = self.altitude_fig.add_subplot(111)
+        self.altitude_graph.set_title('Altitude', color='#00FF00')
 
-        self.fuel_label2 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label2.pack()
+        self.altitude_canvas = FigureCanvasTkAgg(self.altitude_fig, master=altitude_frame)
+        self.altitude_canvas.draw()
+        self.altitude_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+        # Velocity frame
+        velocity_frame = tk.Frame(self.window, bg="black")
+        velocity_frame.pack(side=tk.TOP, fill=tk.BOTH)
+
+        self.velocity_label = tk.Label(velocity_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.velocity_label.pack(side=tk.TOP)
+
+        self.velocity_fig = Figure(figsize=(6, 2), dpi=100)
+        self.velocity_graph = self.velocity_fig.add_subplot(111)
+        self.velocity_graph.set_title('Velocity', color='#00FF00')
+
+        self.velocity_canvas = FigureCanvasTkAgg(self.velocity_fig, master=velocity_frame)
+        self.velocity_canvas.draw()
+        self.velocity_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+        # Fuel frame
+        fuel_frame = tk.Frame(self.window, bg="black")
+        fuel_frame.pack(side=tk.TOP, fill=tk.BOTH)
+
+        self.fuel_label1 = tk.Label(fuel_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.fuel_label1.pack(side=tk.TOP)
+
+        self.fuel_fig = Figure(figsize=(6, 2), dpi=100)
+        self.fuel_graph = self.fuel_fig.add_subplot(111)
+        self.fuel_graph.set_title('Fuel', color='#00FF00')
+
+        self.fuel_canvas = FigureCanvasTkAgg(self.fuel_fig, master=fuel_frame)
+        self.fuel_canvas.draw()
+        self.fuel_canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+        self.fuel_label2 = tk.Label(fuel_frame, fg="#00FF00", bg="black", font=("Courier", 20))
+        self.fuel_label2.pack(side=tk.TOP)
 
         self.staging_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.pack()
+        self.staging_label.pack(side=tk.TOP)
 
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
