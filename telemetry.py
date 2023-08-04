@@ -122,7 +122,7 @@ class TelemetryInterface:
             self.update_ui(altitude, velocity, fuel)
             
 			# Schedule the next update
-            self.window.after(100, lambda: self.update_telemetry_data(simulation_time))
+            self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
         else:
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
             print("SIMULATION COMPLETE")
