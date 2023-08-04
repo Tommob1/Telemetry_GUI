@@ -141,17 +141,17 @@ class TelemetryInterface:
         self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
 
     def update_telemetry_data(self, simulation_time):
-        if time.time() - simulation_time <= 60:  # Run for 1 minute
+        if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
-            altitude_growth_factor = 0.15
-            velocity_growth_factor = 0.15
+            altitude_growth_factor = 0.02
+            velocity_growth_factor = 0.02
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
             #SIMULATED ALTITUDE AND VELOCITY RUN EXPONETIALLY SLOWER. CHANGE TO BE EXPONETIALLY FASTER
-            altitude = 100 * (1 - math.exp(-altitude_growth_factor * elapsed_time))  # Altitude increases from 0 to 100
-            velocity = 5000 * (1 - math.exp(-velocity_growth_factor * elapsed_time))  # Velocity increases from 0 to 5000
+            altitude = 100 * (math.exp(altitude_growth_factor * elapsed_time) - 1)  # Altitude increases from 0 to 100
+            velocity = 5000 * (math.exp(velocity_growth_factor * elapsed_time) - 1)  # Velocity increases from 0 to 5000
             fuel = 100 - (100 * elapsed_percent)  # Fuel decreases from 100% to 0%
 
 			# Update the UI
