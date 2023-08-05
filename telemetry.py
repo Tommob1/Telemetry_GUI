@@ -88,12 +88,12 @@ class TelemetryInterface:
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
 
-        self.fig.subplots_adjust(hspace=0.5)
+        self.fig.subplots_adjust(top=1)
         self.fig.patch.set_facecolor('black')
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)  
         self.canvas.draw()
-        self.canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
+        self.canvas.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
 
         # Time and data lists
         self.times = []
