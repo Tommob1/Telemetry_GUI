@@ -55,19 +55,19 @@ class TelemetryInterface:
 
         # Telemetry Data Labels
         self.altitude_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.altitude_label.pack()
+        self.altitude_label.grid(row=0, column=0)
 
         self.velocity_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.velocity_label.pack()
+        self.velocity_label.grid(row=1, column=0)
 
         self.fuel_label1 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label1.pack()
+        self.fuel_label1.grid(row=0, column=1)
 
         self.fuel_label2 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label2.pack()
+        self.fuel_label2.grid(row=1, column=1)
 
         self.staging_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.pack()
+        self.staging_label.grid(row=2, column=1)
 
         
         # Telemetry Data Graphs
@@ -93,7 +93,7 @@ class TelemetryInterface:
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)  
         self.canvas.draw()
-        self.canvas.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+        self.canvas.get_tk_widget().grid(row=5, column=0, columnspan=3)
 
         # Time and data lists
         self.times = []
