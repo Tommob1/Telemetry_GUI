@@ -12,7 +12,7 @@ class TelemetryInterface:
         self.window = window
         self.window.title("Simulated Telemetry UI")
         self.window.geometry("1920x1080")
-        self.window.resizable(False, False)
+        self.window.resizable(True, True)
         self.window.configure(background="black")
 
         # Display logo
