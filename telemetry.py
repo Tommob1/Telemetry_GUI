@@ -68,7 +68,7 @@ class TelemetryInterface:
         self.fuel_label2 = tk.Label(self.window, text="Fuel 2:", **settings)
         self.fuel_label2.grid(row=1, column=2, sticky="e")
 
-        self.staging_label = tk.Label(self.window, text="Staging:", **settings, font=("Courier", 23))
+        self.staging_label = tk.Label(self.window, text="Staging:", fg="#00FF00", bg="black", font=("Courier", 23))
         self.staging_label.grid(row=2, column=1, columnspan=2, sticky="e")
 
         # Telemetry Data Graphs
@@ -92,6 +92,11 @@ class TelemetryInterface:
         self.canvas.draw()
         self.canvas.get_tk_widget().grid(row=3, column=0, columnspan=4)
 
+        # Adjust the size of the grid cells
+        for i in range(4):
+            self.window.grid_columnconfigure(i, minsize=480)  # 480*4 = 1920
+        for i in range(3):
+            self.window.grid_rowconfigure(i, minsize=360)  # 360*3 = 1080
 
         # Time and data lists
         self.times = []
