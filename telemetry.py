@@ -14,6 +14,7 @@ class TelemetryInterface:
         self.window.geometry("1920x1080")
         self.window.resizable(True, True)
         self.window.configure(background="black")
+        self.window.attributes('-fullscreen', True)
 
         # Display logo
         self.logo()
