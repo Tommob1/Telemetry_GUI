@@ -57,19 +57,19 @@ class TelemetryInterface:
 
         # Telemetry Data Labels
         self.altitude_label = tk.Label(self.window, text="Altitude:", **settings)
-        self.altitude_label.grid(row=0, column=3, sticky="e", padx=5, pady=5)
+        self.altitude_label.grid(row=1, column=2, sticky="e", padx=1, pady=1)
 
         self.velocity_label = tk.Label(self.window, text="Velocity:", **settings)
-        self.velocity_label.grid(row=1, column=3, sticky="e", padx=5, pady=5)
+        self.velocity_label.grid(row=2, column=2, sticky="e", padx=1, pady=1)
 
         self.fuel_label1 = tk.Label(self.window, text="Fuel 1:", **settings)
-        self.fuel_label1.grid(row=2, column=3, sticky="e", padx=5, pady=5)
+        self.fuel_label1.grid(row=3, column=2, sticky="e", padx=1, pady=1)
 
         self.fuel_label2 = tk.Label(self.window, text="Fuel 2:", **settings)
-        self.fuel_label2.grid(row=2, column=4, sticky="e", padx=5, pady=5)
+        self.fuel_label2.grid(row=4, column=2, sticky="e", padx=1, pady=1)
 
         self.staging_label = tk.Label(self.window, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=3, column=3, columnspan=2, sticky="e", padx=5, pady=5)
+        self.staging_label.grid(row=5, column=2, columnspan=2, sticky="e", padx=1, pady=1)
 
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
@@ -101,7 +101,7 @@ class TelemetryInterface:
         self.window.grid_columnconfigure(3, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
         self.window.grid_rowconfigure(1, weight=1)
-        self.window.grid_rowconfigure(2, weight=3)  # assign more weight to the row with the graph
+        self.window.grid_rowconfigure(2, weight=1)  # assign more weight to the row with the graph
         self.window.grid_rowconfigure(3, weight=1)
 
 
