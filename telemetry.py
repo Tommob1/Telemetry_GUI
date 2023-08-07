@@ -57,25 +57,27 @@ class TelemetryInterface:
 
         # Telemetry Data Labels
         self.altitude_label = tk.Label(self.window, text="Altitude:", **settings)
-        self.altitude_label.grid(row=0, column=0, sticky="e")
+        self.altitude_label.grid(row=0, column=3, sticky="e", padx=5, pady=5)
 
         self.velocity_label = tk.Label(self.window, text="Velocity:", **settings)
-        self.velocity_label.grid(row=1, column=0, sticky="e")
+        self.velocity_label.grid(row=1, column=3, sticky="e", padx=5, pady=5)
 
         self.fuel_label1 = tk.Label(self.window, text="Fuel 1:", **settings)
-        self.fuel_label1.grid(row=0, column=2, sticky="e")
+        self.fuel_label1.grid(row=2, column=3, sticky="e", padx=5, pady=5)
 
         self.fuel_label2 = tk.Label(self.window, text="Fuel 2:", **settings)
-        self.fuel_label2.grid(row=1, column=2, sticky="e")
+        self.fuel_label2.grid(row=2, column=4, sticky="e", padx=5, pady=5)
 
-        self.staging_label = tk.Label(self.window, text="Staging:", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=2, column=1, columnspan=2, sticky="e")
+        self.staging_label = tk.Label(self.window, text="", fg="#00FF00", bg="black", font=("Courier", 23))
+        self.staging_label.grid(row=3, column=3, columnspan=2, sticky="e", padx=5, pady=5)
 
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
         self.altitude_graph = self.fig.add_subplot(311)
         self.velocity_graph = self.fig.add_subplot(312)
         self.fuel_graph = self.fig.add_subplot(313)
+        self.fig.subplots_adjust(hspace=1)
+        self.fig.tight_layout
 
         self.altitude_graph.set_facecolor('black')
         self.velocity_graph.set_facecolor('black')
@@ -90,13 +92,18 @@ class TelemetryInterface:
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)
         self.canvas.draw()
-        self.canvas.get_tk_widget().grid(row=3, column=0, columnspan=4)
+        self.canvas.get_tk_widget().grid(row=2, column=0, columnspan=1, sticky="nsew")
 
         # Adjust the size of the grid cells
-        for i in range(4):
-            self.window.grid_columnconfigure(i, minsize=480)  # 480*4 = 1920
-        for i in range(3):
-            self.window.grid_rowconfigure(i, minsize=360)  # 360*3 = 1080
+        self.window.grid_columnconfigure(0, weight=1)
+        self.window.grid_columnconfigure(1, weight=1)
+        self.window.grid_columnconfigure(2, weight=1)
+        self.window.grid_columnconfigure(3, weight=1)
+        self.window.grid_rowconfigure(0, weight=1)
+        self.window.grid_rowconfigure(1, weight=1)
+        self.window.grid_rowconfigure(2, weight=3)  # assign more weight to the row with the graph
+        self.window.grid_rowconfigure(3, weight=1)
+
 
         # Time and data lists
         self.times = []
