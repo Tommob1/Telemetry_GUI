@@ -48,28 +48,29 @@ class TelemetryInterface:
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
 
-
     def init_simulation(self):
-       # Remove logo
+        # Remove logo
         self.logo_label.grid_remove()
 
+        # Set some general settings for all the labels
+        settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
+
         # Telemetry Data Labels
-        self.altitude_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.altitude_label.grid(row=0, column=0)
+        self.altitude_label = tk.Label(self.window, text="Altitude:", **settings)
+        self.altitude_label.grid(row=0, column=0, sticky="e")
 
-        self.velocity_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.velocity_label.grid(row=1, column=0)
+        self.velocity_label = tk.Label(self.window, text="Velocity:", **settings)
+        self.velocity_label.grid(row=1, column=0, sticky="e")
 
-        self.fuel_label1 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label1.grid(row=0, column=1)
+        self.fuel_label1 = tk.Label(self.window, text="Fuel 1:", **settings)
+        self.fuel_label1.grid(row=0, column=2, sticky="e")
 
-        self.fuel_label2 = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 20))
-        self.fuel_label2.grid(row=1, column=1)
+        self.fuel_label2 = tk.Label(self.window, text="Fuel 2:", **settings)
+        self.fuel_label2.grid(row=1, column=2, sticky="e")
 
-        self.staging_label = tk.Label(self.window, fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=2, column=1)
+        self.staging_label = tk.Label(self.window, text="Staging:", **settings, font=("Courier", 23))
+        self.staging_label.grid(row=2, column=1, columnspan=2, sticky="e")
 
-        
         # Telemetry Data Graphs
         self.fig = Figure(figsize=(6, 6), dpi=100)
         self.altitude_graph = self.fig.add_subplot(311)
@@ -79,6 +80,7 @@ class TelemetryInterface:
         self.altitude_graph.set_facecolor('black')
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
+
         self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
@@ -86,9 +88,10 @@ class TelemetryInterface:
         self.fig.subplots_adjust(top=1)
         self.fig.patch.set_facecolor('black')
 
-        self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)  
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)
         self.canvas.draw()
-        self.canvas.get_tk_widget().grid(row=4, column=0, columnspan=3)
+        self.canvas.get_tk_widget().grid(row=3, column=0, columnspan=4)
+
 
         # Time and data lists
         self.times = []
