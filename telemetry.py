@@ -71,7 +71,7 @@ class TelemetryInterface:
         self.fuel_label2 = tk.Label(frame_labels, text="Fuel 2:", **settings)
         self.fuel_label2.grid(row=2, column=1, sticky="w", padx=5, pady=5)
 
-        self.staging_label = tk.Label(frame_labels, text="Staging:", fg="#00FF00", bg="black", font=("Courier", 23))
+        self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
         self.staging_label.grid(row=3, column=0, columnspan=2, sticky="w", padx=5, pady=5)
 
         # Frame for Telemetry Data Graphs
