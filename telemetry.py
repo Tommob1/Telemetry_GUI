@@ -18,7 +18,7 @@ class TelemetryInterface:
 
         # Display logo
         self.logo()
-        self.window.after(5000, self.init_simulation)
+        self.window.after(2500, self.init_simulation)
         print("""███████╗██╗      █████╗ 
 ██╔════╝██║     ██╔══██╗
 █████╗  ██║     ███████║
@@ -77,9 +77,9 @@ class TelemetryInterface:
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
-        frame_graphs.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+        frame_graphs.grid(row=0, column=3, padx=10, pady=10, sticky="nsew")
 
-        self.fig = Figure(figsize=(6, 6), dpi=100)
+        self.fig = Figure(figsize=(8, 8), dpi=100)
         self.altitude_graph = self.fig.add_subplot(311)
         self.velocity_graph = self.fig.add_subplot(312)
         self.fuel_graph = self.fig.add_subplot(313)
@@ -87,6 +87,10 @@ class TelemetryInterface:
         self.altitude_graph.set_facecolor('black')
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
+
+        self.altitude_graph.set_title('Altitude', color='#00FF00')
+        self.velocity_graph.set_title('Velocity', color='#00FF00')
+        self.fuel_graph.set_title('Fuel', color='#00FF00')
 
         self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
