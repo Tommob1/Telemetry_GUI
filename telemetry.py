@@ -79,7 +79,6 @@ class TelemetryInterface:
         self.altitude_graph.set_facecolor('black')
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
-
         self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
@@ -89,7 +88,7 @@ class TelemetryInterface:
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=self.window)  
         self.canvas.draw()
-        self.canvas.get_tk_widget().grid(row=5, column=0, columnspan=3)
+        self.canvas.get_tk_widget().grid(row=4, column=0, columnspan=3)
 
         # Time and data lists
         self.times = []
