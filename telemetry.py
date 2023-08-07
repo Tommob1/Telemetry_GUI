@@ -80,10 +80,6 @@ class TelemetryInterface:
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
 
-        self.altitude_graph.set_title('Altitude vs Time', color='#00FF00')
-        self.velocity_graph.set_title('Velocity vs Time', color='#00FF00')
-        self.fuel_graph.set_title('Fuel vs Time', color='#00FF00')
-
         self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
