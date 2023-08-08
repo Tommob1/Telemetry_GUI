@@ -61,23 +61,22 @@ class TelemetryInterface:
         frame_labels.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
         self.timer_label = tk.Label(frame_labels, text="T+", **settings)
-        self.timer_label.grid(row=5, column=0, sticky="w", padx=5, pady=5)
+        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=5)
 
-    
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
-        self.altitude_label.grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         self.velocity_label = tk.Label(frame_labels, text="Velocity:", **settings)
-        self.velocity_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.velocity_label.grid(row=2, column=0, sticky="w", padx=5, pady=5)
 
         self.fuel_label1 = tk.Label(frame_labels, text="Fuel 1:", **settings)
-        self.fuel_label1.grid(row=2, column=0, sticky="w", padx=5, pady=5)
+        self.fuel_label1.grid(row=3, column=0, sticky="w", padx=5, pady=5)
 
         self.fuel_label2 = tk.Label(frame_labels, text="Fuel 2:", **settings)
-        self.fuel_label2.grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=5)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=4, column=0, columnspan=2, sticky="w", padx=5, pady=5)
+        self.staging_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=5, pady=5)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
