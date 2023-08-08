@@ -3,6 +3,7 @@ import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from PIL import ImageTk, Image
+from datetime import timedelta
 import time
 import math
 
@@ -60,23 +61,23 @@ class TelemetryInterface:
         frame_labels = tk.Frame(self.window, bg="black")
         frame_labels.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-        self.timer_label = tk.Label(frame_labels, text="T+", **settings)
-        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=5)
+        self.timer_label = tk.Label(frame_labels, text="T+", fg="#00FF00", bg="black", font=("Courier", 30))
+        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
 
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
-        self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=10)
 
         self.velocity_label = tk.Label(frame_labels, text="Velocity:", **settings)
-        self.velocity_label.grid(row=2, column=0, sticky="w", padx=5, pady=5)
+        self.velocity_label.grid(row=2, column=0, sticky="w", padx=5, pady=10)
 
         self.fuel_label1 = tk.Label(frame_labels, text="Fuel 1:", **settings)
-        self.fuel_label1.grid(row=3, column=0, sticky="w", padx=5, pady=5)
+        self.fuel_label1.grid(row=3, column=0, sticky="w", padx=5, pady=10)
 
         self.fuel_label2 = tk.Label(frame_labels, text="Fuel 2:", **settings)
-        self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=5)
+        self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=10)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=5, pady=5)
+        self.staging_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
@@ -119,7 +120,6 @@ class TelemetryInterface:
         self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
 
     def update_telemetry_data(self, simulation_time):
-        global elapsed_time
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
@@ -149,8 +149,10 @@ class TelemetryInterface:
         self.velocities.append(velocity)
         self.fuels.append(fuel)
 
+        elapsed_time = timedelta(seconds=int(self.times[-1]))
+
         # Update the labels with the new data
-        self.timer_label.config(text="T+ %.2f seconds" % elapsed_time)
+        self.timer_label.config(text=f"T+ {elapsed_time}")
         self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
         self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
         self.fuel_label1.config(text="Stage 1 Fuel: %.2f%%" % fuel)
