@@ -88,19 +88,14 @@ class TelemetryInterface:
         self.velocity_graph.set_facecolor('black')
         self.fuel_graph.set_facecolor('black')
 
-        self.altitude_graph.text(0.5, 0.9, 'Altitude', color='#00FF00', ha='center', va='center', fontsize=20)
-        self.velocity_graph.text(0.5, 0.9, 'Velocity', color='#00FF00', ha='center', va='center', fontsize=20)
-        self.fuel_graph.text(0.5, 0.9, 'Fuel', color='#00FF00', ha='center', va='center', fontsize=20)
-
         self.altitude_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.velocity_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
         self.fuel_graph.tick_params(colors='#00FF00', grid_color='#00FF00')
 
-        self.fig.subplots_adjust(top=0.85, hspace=1)
         self.fig.patch.set_facecolor('black')
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=frame_graphs)
-        self.fig.tight_layout()
+        self.fig.tight_layout(pad=5)
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill='both', expand=True)
 
@@ -161,16 +156,19 @@ class TelemetryInterface:
         self.altitude_graph.plot(self.times, self.altitudes, 'g')
         self.altitude_graph.set_xlim(0, 60)
         self.altitude_graph.set_ylim(0, 100)
+        self.altitude_graph.set_title('Altitude(KM):', color='#00FF00')
 
         self.velocity_graph.clear()
         self.velocity_graph.plot(self.times, self.velocities, 'g')
         self.velocity_graph.set_xlim(0, 60)
         self.velocity_graph.set_ylim(0, 5000)
+        self.velocity_graph.set_title('Velocity(KM/H):', color='#00FF00')
 
         self.fuel_graph.clear()
         self.fuel_graph.plot(self.times, self.fuels, 'g')
         self.fuel_graph.set_xlim(0, 60)
         self.fuel_graph.set_ylim(0, 100)
+        self.fuel_graph.set_title('Stage 1 Fuel(%):', color='#00FF00')
 
         # Add these lines after you have setup your subplot and before you draw the canvas
 
