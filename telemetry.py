@@ -59,6 +59,10 @@ class TelemetryInterface:
         # Frame for Telemetry Data Labels
         frame_labels = tk.Frame(self.window, bg="black")
         frame_labels.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        self.timer_label = tk.Label(frame_labels, text="T+", **settings)
+        self.timer_label.grid(row=5, column=0, sticky="w", padx=5, pady=5)
+
     
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
         self.altitude_label.grid(row=0, column=0, sticky="w", padx=5, pady=5)
@@ -95,7 +99,7 @@ class TelemetryInterface:
         self.fig.patch.set_facecolor('black')
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=frame_graphs)
-        self.fig.tight_layout(pad=5)
+        self.fig.tight_layout(pad=4)
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(fill='both', expand=True)
 
@@ -116,6 +120,7 @@ class TelemetryInterface:
         self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
 
     def update_telemetry_data(self, simulation_time):
+        global elapsed_time
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
@@ -146,6 +151,7 @@ class TelemetryInterface:
         self.fuels.append(fuel)
 
         # Update the labels with the new data
+        self.timer_label.config(text="T+ %.2f seconds" % elapsed_time)
         self.altitude_label.config(text="Altitude: %.2f KM" % altitude)
         self.velocity_label.config(text="Velocity: %.2f KM/H" % velocity)
         self.fuel_label1.config(text="Stage 1 Fuel: %.2f%%" % fuel)
@@ -161,7 +167,7 @@ class TelemetryInterface:
         self.velocity_graph.clear()
         self.velocity_graph.plot(self.times, self.velocities, 'g')
         self.velocity_graph.set_xlim(0, 60)
-        self.velocity_graph.set_ylim(0, 5000)
+        self.velocity_graph.set_ylim(0, 5500)
         self.velocity_graph.set_title('Velocity(KM/H):', color='#00FF00')
 
         self.fuel_graph.clear()
