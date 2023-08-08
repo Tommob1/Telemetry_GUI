@@ -70,16 +70,16 @@ class TelemetryInterface:
         self.fuel_label1.grid(row=2, column=0, sticky="w", padx=5, pady=5)
 
         self.fuel_label2 = tk.Label(frame_labels, text="Fuel 2:", **settings)
-        self.fuel_label2.grid(row=2, column=1, sticky="w", padx=5, pady=5)
+        self.fuel_label2.grid(row=3, column=0, sticky="w", padx=5, pady=5)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=3, column=0, columnspan=2, sticky="w", padx=5, pady=5)
+        self.staging_label.grid(row=4, column=0, columnspan=2, sticky="w", padx=5, pady=5)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
         frame_graphs.grid(row=0, column=3, padx=10, pady=10, sticky="nsew")
 
-        self.fig = Figure(figsize=(8, 8), dpi=100)
+        self.fig = Figure(figsize=(8, 10), dpi=100)
         self.altitude_graph = self.fig.add_subplot(311)
         self.velocity_graph = self.fig.add_subplot(312)
         self.fuel_graph = self.fig.add_subplot(313)
@@ -124,8 +124,8 @@ class TelemetryInterface:
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
-            altitude_growth_factor = 0.02
-            velocity_growth_factor = 0.02
+            altitude_growth_factor = 0.01
+            velocity_growth_factor = 0.012
 
             # Calculate altitude, velocity and fuel data based on the elapsed time
             #SIMULATED ALTITUDE AND VELOCITY RUN EXPONETIALLY SLOWER. CHANGE TO BE EXPONETIALLY FASTER
