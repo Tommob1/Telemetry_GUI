@@ -62,7 +62,7 @@ class TelemetryInterface:
         frame_labels.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
         self.timer_label = tk.Label(frame_labels, text="T+", fg="#00FF00", bg="black", font=("Courier", 30))
-        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
+        self.timer_label.grid(row=0, column=1, sticky="w", padx=10, pady=10)
 
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
         self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=10)
