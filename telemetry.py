@@ -17,6 +17,8 @@ class TelemetryInterface:
         self.window.configure(background="black")
         self.window.attributes('-fullscreen', True)
 
+        self.status_message = tk.StringVar()
+
         # Display logo
         self.logo()
         self.window.after(2500, self.init_ui)
@@ -74,7 +76,10 @@ class TelemetryInterface:
         self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=10)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=5, pady=10)
+        self.staging_label.grid(row=6, column=0, columnspan=2, sticky="w", padx=5, pady=10)
+
+        self.status_label = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23))
+        self.status_label.grid(row=5, column=0, columnspan=2, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
@@ -110,6 +115,10 @@ class TelemetryInterface:
         self.altitude_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.altitude_graph.transAxes, color='#00FF00', linewidth=2)
         self.velocity_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.velocity_graph.transAxes, color='#00FF00', linewidth=2)
         self.fuel_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.fuel_graph.transAxes, color='#00FF00', linewidth=2)
+
+        self.altitude_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
+        self.velocity_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
+        self.fuel_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=frame_graphs)
         self.fig.tight_layout(pad=4)
@@ -153,7 +162,13 @@ class TelemetryInterface:
             hours, mins = divmod(mins, 60)
             time_str = "T- {:02d}:{:02d}:{:02d}".format(hours, mins, sec)
 
-            # Update the label
+            # Check for specific times to display messages
+            if self.remaining_time == 10:
+                self.status_message.set("Engine Startup")
+            elif self.remaining_time == 1:
+                self.status_message.set("Engine Ignition")
+
+            # Update the timer label
             self.timer_label.config(text=time_str)
 
             # Schedule the function to run after 1 second
@@ -164,7 +179,10 @@ class TelemetryInterface:
         else:
             # Once the countdown is done, remove the countdown timer label
             self.timer_label.grid_forget()
-            
+        
+            # Display the T+0 message
+            self.status_message.set("Engine Full Power")
+
             # Initialize the simulation start time
             self.simulation_start_time = time.time()
 
@@ -244,6 +262,11 @@ class TelemetryInterface:
         self.altitude_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.altitude_graph.transAxes, color='#00FF00', linewidth=2)
         self.velocity_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.velocity_graph.transAxes, color='#00FF00', linewidth=2)
         self.fuel_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.fuel_graph.transAxes, color='#00FF00', linewidth=2)
+
+        self.altitude_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
+        self.velocity_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
+        self.fuel_graph.grid(True, which='both', linestyle='--', linewidth=0.5, color='#00FF00')
+
 
         self.canvas.draw()
 
