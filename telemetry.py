@@ -117,7 +117,44 @@ class TelemetryInterface:
         self.simulation_start_time = time.time() # Stores the simulation start time
 
         # Update function launched in a new thread
-        self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
+        #self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
+
+        # Initialize the timer label for the countdown
+        self.timer_label = tk.Label(frame_labels, text="T- 00:00:10", fg="#00FF00", bg="black", font=("Courier", 30))
+        self.timer_label.grid(row=0, column=0, sticky="nsew", padx=5, pady=10)
+
+        # Center the label in the window for the Y-axis
+        self.window.grid_rowconfigure(0, weight=1)
+
+        # Start the countdown timer
+        self.start_countdown()
+
+    def start_countdown(self):
+        self.remaining_time = 10  # 10 seconds for the countdown
+        self.countdown()
+
+    def countdown(self):
+        if self.remaining_time >= 0:
+            # Convert the remaining time into HH:MM:SS format
+            mins, sec = divmod(self.remaining_time, 60)
+            hours, mins = divmod(mins, 60)
+            time_str = "T- {:02d}:{:02d}:{:02d}".format(hours, mins, sec)
+
+            # Update the label
+            self.timer_label.config(text=time_str)
+
+            # Schedule the function to run after 1 second
+            self.window.after(1000, self.countdown)
+
+            # Decrement the remaining time
+            self.remaining_time -= 1
+        else:
+            # Once the countdown is done, remove the countdown timer label
+            self.timer_label.grid_forget()
+            
+            # Start the telemetry data function
+            self.update_telemetry_data(time.time())
+
 
     def update_telemetry_data(self, simulation_time):
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
