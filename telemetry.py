@@ -95,6 +95,22 @@ class TelemetryInterface:
 
         self.fig.patch.set_facecolor('black')
 
+        self.altitude_graph.set_xlim(0, 60)
+        self.altitude_graph.set_ylim(0, 100)
+        self.altitude_graph.set_title('Altitude(KM):', color='#00FF00')
+
+        self.velocity_graph.set_xlim(0, 60)
+        self.velocity_graph.set_ylim(0, 5500)
+        self.velocity_graph.set_title('Velocity(KM/H):', color='#00FF00')
+
+        self.fuel_graph.set_xlim(0, 60)
+        self.fuel_graph.set_ylim(0, 100)
+        self.fuel_graph.set_title('Stage 1 Fuel(%):', color='#00FF00')
+
+        self.altitude_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.altitude_graph.transAxes, color='#00FF00', linewidth=2)
+        self.velocity_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.velocity_graph.transAxes, color='#00FF00', linewidth=2)
+        self.fuel_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.fuel_graph.transAxes, color='#00FF00', linewidth=2)
+
         self.canvas = FigureCanvasTkAgg(self.fig, master=frame_graphs)
         self.fig.tight_layout(pad=4)
         self.canvas.draw()
@@ -224,8 +240,6 @@ class TelemetryInterface:
         self.fuel_graph.set_xlim(0, 60)
         self.fuel_graph.set_ylim(0, 100)
         self.fuel_graph.set_title('Stage 1 Fuel(%):', color='#00FF00')
-
-        # Add these lines after you have setup your subplot and before you draw the canvas
 
         self.altitude_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.altitude_graph.transAxes, color='#00FF00', linewidth=2)
         self.velocity_graph.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], transform=self.velocity_graph.transAxes, color='#00FF00', linewidth=2)
