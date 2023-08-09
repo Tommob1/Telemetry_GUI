@@ -61,19 +61,16 @@ class TelemetryInterface:
         frame_labels = tk.Frame(self.window, bg="black")
         frame_labels.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
-        self.timer_label = tk.Label(frame_labels, text="T+", fg="#00FF00", bg="black", font=("Courier", 30))
-        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
-
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
         self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=10)
 
         self.velocity_label = tk.Label(frame_labels, text="Velocity:", **settings)
         self.velocity_label.grid(row=2, column=0, sticky="w", padx=5, pady=10)
 
-        self.fuel_label1 = tk.Label(frame_labels, text="Fuel 1:", **settings)
+        self.fuel_label1 = tk.Label(frame_labels, text="Stage 1 Fuel:", **settings)
         self.fuel_label1.grid(row=3, column=0, sticky="w", padx=5, pady=10)
 
-        self.fuel_label2 = tk.Label(frame_labels, text="Fuel 2:", **settings)
+        self.fuel_label2 = tk.Label(frame_labels, text="Stage 2 Fuel:", **settings)
         self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=10)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
@@ -154,6 +151,12 @@ class TelemetryInterface:
             
             # Initialize the simulation start time
             self.simulation_start_time = time.time()
+
+            # Reset the label's text to T+ 00:00:00
+            self.timer_label.config(text="T+ 00:00:00")
+        
+            # Make the label visible again on the grid
+            self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
 
             # Start the telemetry data function
             self.update_telemetry_data(self.simulation_start_time)
