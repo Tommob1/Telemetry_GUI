@@ -19,7 +19,7 @@ class TelemetryInterface:
 
         # Display logo
         self.logo()
-        self.window.after(2500, self.init_simulation)
+        self.window.after(2500, self.init_ui)
         print("""███████╗██╗      █████╗ 
 ██╔════╝██║     ██╔══██╗
 █████╗  ██║     ███████║
@@ -50,7 +50,7 @@ class TelemetryInterface:
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
 
-    def init_simulation(self):
+    def init_ui(self):
         # Remove logo
         self.logo_label.grid_remove()
 
