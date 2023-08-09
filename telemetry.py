@@ -152,8 +152,11 @@ class TelemetryInterface:
             # Once the countdown is done, remove the countdown timer label
             self.timer_label.grid_forget()
             
+            # Initialize the simulation start time
+            self.simulation_start_time = time.time()
+
             # Start the telemetry data function
-            self.update_telemetry_data(time.time())
+            self.update_telemetry_data(self.simulation_start_time)
 
 
     def update_telemetry_data(self, simulation_time):
@@ -187,6 +190,11 @@ class TelemetryInterface:
         self.fuels.append(fuel)
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
+
+        # Update the T+ timer on the UI
+        hours, remainder = divmod(elapsed_time.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        self.timer_label.config(text=f"T+ {hours:02}:{minutes:02}:{seconds:02}")
 
         # Update the labels with the new data
         self.timer_label.config(text=f"T+ {elapsed_time}")
