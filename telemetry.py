@@ -204,6 +204,14 @@ class TelemetryInterface:
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
+            # Update Vehicle Status Messages
+            if round(elapsed_time) == 1:
+                self.status_message.set("Liftoff")
+                print("Liftoff")
+            elif round(elapsed_time) == 20:
+                self.status_message.set("Max-Q")
+                print("Max-Q")
+
             altitude_growth_factor = 0.01
             velocity_growth_factor = 0.012
 
