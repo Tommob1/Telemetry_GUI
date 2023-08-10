@@ -20,12 +20,7 @@ class TelemetryInterface:
         # Display logo
         self.logo()
         self.window.after(2500, self.init_ui)
-        print("""███████╗██╗      █████╗ 
-██╔════╝██║     ██╔══██╗
-█████╗  ██║     ███████║
-██╔══╝  ██║     ██╔══██║
-███████╗███████╗██║  ██║
-╚══════╝╚══════╝╚═╝  ╚═╝""")
+        print("WINDOW STARTED")
 
     def logo(self):
         # Get the directory of this script
@@ -74,7 +69,7 @@ class TelemetryInterface:
         self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=10)
 
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 25))
-        self.staging_label.grid(row=1, column=4, columnspan=2, sticky="w", padx=5, pady=10)
+        self.staging_label.grid(row=2, column=4, columnspan=2, sticky="w", padx=5, pady=10)
 
         # Spacecraft Status static label
         self.status_label_static = tk.Label(frame_labels, text="Vehicle Status:", fg="#00FF00", bg="black", font=("Courier", 23))
@@ -84,7 +79,7 @@ class TelemetryInterface:
 
         # Dynamic status message label
         self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23), width=25, anchor="w")
-        self.status_label_dynamic.grid(row=0, column=5, sticky="w", padx=5, pady=10)
+        self.status_label_dynamic.grid(row=1, column=4, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
@@ -170,8 +165,10 @@ class TelemetryInterface:
             # Check for specific times to display messages
             if self.remaining_time == 10:
                 self.status_message.set("Engine Startup")
+                print("Engine Startup")
             elif self.remaining_time == 1:
                 self.status_message.set("Engine Ignition")
+                print("Engine Ignition")
 
             # Update the timer label
             self.timer_label.config(text=time_str)
@@ -187,6 +184,7 @@ class TelemetryInterface:
         
             # Display the T+0 message
             self.status_message.set("Engine Full Power")
+            print("Engine Full Power")
 
             # Initialize the simulation start time
             self.simulation_start_time = time.time()
@@ -276,6 +274,5 @@ class TelemetryInterface:
         self.canvas.draw()
 
 window = tk.Tk()
-print("WINDOW STARTED")
 app = TelemetryInterface(window)
 window.mainloop()
