@@ -205,7 +205,7 @@ class TelemetryInterface:
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
             # Update Vehicle Status Messages
-            if round(elapsed_time) == 1:
+            if round(elapsed_time) == 2:
                 self.status_message.set("Liftoff")
             elif round(elapsed_time) == 10:
                 self.status_message.set("Engine Throttle Down")
