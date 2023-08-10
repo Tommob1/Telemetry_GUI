@@ -217,6 +217,8 @@ class TelemetryInterface:
                 self.status_message.set("Engine Full Power")
             elif round(elapsed_time) == 55:
                 self.status_message.set("Engine Throttle Down")
+            elif round(elapsed_time) == 58:
+                self.status_message.set("Stage Separation")
 
             altitude_growth_factor = 0.01
             velocity_growth_factor = 0.012
