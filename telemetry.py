@@ -73,18 +73,18 @@ class TelemetryInterface:
         self.fuel_label2 = tk.Label(frame_labels, text="Stage 2 Fuel:", **settings)
         self.fuel_label2.grid(row=4, column=0, sticky="w", padx=5, pady=10)
 
-        self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.staging_label.grid(row=6, column=0, columnspan=2, sticky="w", padx=5, pady=10)
+        self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 25))
+        self.staging_label.grid(row=1, column=4, columnspan=2, sticky="w", padx=5, pady=10)
 
         # Spacecraft Status static label
         self.status_label_static = tk.Label(frame_labels, text="Vehicle Status:", fg="#00FF00", bg="black", font=("Courier", 23))
-        self.status_label_static.grid(row=5, column=0, sticky="w", padx=5, pady=10)
+        self.status_label_static.grid(row=0, column=4, sticky="w", padx=5, pady=10)
 
         self.status_message = tk.StringVar()
 
         # Dynamic status message label
         self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23), width=25, anchor="w")
-        self.status_label_dynamic.grid(row=5, column=1, sticky="w", padx=5, pady=10)
+        self.status_label_dynamic.grid(row=0, column=5, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
         frame_graphs = tk.Frame(self.window, bg="black")
