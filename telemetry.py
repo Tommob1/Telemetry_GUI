@@ -64,7 +64,7 @@ class TelemetryInterface:
         self.altitude_label = tk.Label(frame_labels, text="Altitude:", **settings)
         self.altitude_label.grid(row=1, column=0, sticky="w", padx=5, pady=10)
 
-        self.velocity_label = tk.Label(frame_labels, text="Velocity:", **settings)
+        self.velocity_label = tk.Label(frame_labels, text="Velocity:", width=25, anchor="w", **settings)
         self.velocity_label.grid(row=2, column=0, sticky="w", padx=5, pady=10)
 
         self.fuel_label1 = tk.Label(frame_labels, text="Stage 1 Fuel:", **settings)
