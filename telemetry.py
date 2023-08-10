@@ -83,7 +83,7 @@ class TelemetryInterface:
         self.status_message = tk.StringVar()
 
         # Dynamic status message label
-        self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23))
+        self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23), anchor='w')
         self.status_label_dynamic.grid(row=5, column=1, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
