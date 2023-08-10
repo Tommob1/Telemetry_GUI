@@ -207,10 +207,16 @@ class TelemetryInterface:
             # Update Vehicle Status Messages
             if round(elapsed_time) == 1:
                 self.status_message.set("Liftoff")
-                print("Liftoff")
+            elif round(elapsed_time) == 10:
+                self.status_message.set("Engine Throttle Down")
             elif round(elapsed_time) == 20:
                 self.status_message.set("Max-Q")
-                print("Max-Q")
+            elif round(elapsed_time) == 30:
+                self.status_message.set("Engine Throttle Up")
+            elif round(elapsed_time) == 40:
+                self.status_message.set("Engine Full Power")
+            elif round(elapsed_time) == 55:
+                self.status_message.set("Engine Throttle Down")
 
             altitude_growth_factor = 0.01
             velocity_growth_factor = 0.012
