@@ -83,7 +83,7 @@ class TelemetryInterface:
         self.status_message = tk.StringVar()
 
         # Dynamic status message label
-        self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23), anchor='w')
+        self.status_label_dynamic = tk.Label(frame_labels, textvariable=self.status_message, fg="#00FF00", bg="black", font=("Courier", 23), width=25, anchor="w")
         self.status_label_dynamic.grid(row=5, column=1, sticky="w", padx=5, pady=10)
 
         # Frame for Telemetry Data Graphs
@@ -148,7 +148,7 @@ class TelemetryInterface:
 
         # Initialize the timer label for the countdown
         self.timer_label = tk.Label(frame_labels, text="T- 00:00:10", fg="#00FF00", bg="black", font=("Courier", 30))
-        self.timer_label.grid(row=0, column=0, sticky="nsew", padx=5, pady=10)
+        self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
 
         # Center the label in the window for the Y-axis
         self.window.grid_rowconfigure(0, weight=1)
