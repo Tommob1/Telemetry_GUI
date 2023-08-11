@@ -46,22 +46,70 @@ class TelemetryInterface:
         self.window.grid_rowconfigure(0, weight=1)
 
     def start_menu(self):
-        # Display the 'Begin Simulation' button
-        self.begin_button = tk.Button(self.window, text="Begin Telemetry Simulation", command=self.begin_simulation,
-                                      fg="#00FF00", bg="black", font=("Courier", 24), borderwidth=0)
-        self.begin_button.grid(row=0, column=0, sticky='nsew')
+        # Frame to contain the buttons
+        self.button_frame = tk.Frame(self.window, bg="black")
+        self.button_frame.place(relx=0.5, rely=0.5, anchor='center')
 
-        # Make the button span across the entire window
+        # Display the 'Begin Simulation' button
+        self.begin_button = tk.Button(self.button_frame, text="Begin Telemetry Simulation", command=self.begin_simulation,
+                                      fg="#00FF00", bg="black", font=("Courier", 24), borderwidth=0)
+        self.begin_button.pack(pady=20)
+
+        # More Information button
+        self.info_button = tk.Button(self.button_frame, text="More Information", command=self.show_information,
+                                     fg="#00FF00", bg="black", font=("Courier", 20), borderwidth=0)
+        self.info_button.pack(pady=20)
+
+        # Exit button to close the program
+        self.exit_button = tk.Button(self.button_frame, text="Exit", command=self.window.quit,
+                                     fg="#FF0000", bg="black", font=("Courier", 20), borderwidth=0)
+        self.exit_button.pack(pady=20)
+
+        # Configure grid for the button frame
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
 
+    def show_information(self):
+        """Display personal information within the main window."""
+        # Remove the buttons frame
+        self.button_frame.grid_remove()
+
+        # New frame to contain the information
+        self.info_frame = tk.Frame(self.window, bg="black")
+        self.info_frame.grid(row=0, column=0, sticky='nsew', padx=200, pady=100)
+
+        # Replace the placeholders with your actual details
+        details = {
+            "Name": "Your Name",
+            "Phone": "Your Phone Number",
+            "Email": "Your Email",
+            "LinkedIn": "Your LinkedIn Profile"
+        }
+
+        row = 0
+        for key, value in details.items():
+            tk.Label(self.info_frame, text=f"{key}: {value}", font=("Courier", 16), bg="black", fg="#00FF00").grid(row=row, column=0, padx=10, pady=5)
+            row += 1
+
+        # Back button to return to the main screen
+        back_button = tk.Button(self.info_frame, text="Back", command=self.back_to_main, font=("Courier", 16), bg="#00FF00")
+        back_button.grid(row=row, column=0, pady=20)
+
+
+    def back_to_main(self):
+        """Return to the main screen."""
+        # Remove the information frame
+        self.info_frame.grid_remove()
+        # Show the buttons frame again
+        self.button_frame.grid()
+
     def begin_simulation(self):
-        # Remove the 'Begin Simulation' button
-        self.begin_button.grid_remove()
-        
+        # Remove the menu (button frame in this case)
+        self.button_frame.grid_remove()
         # Initialize the UI for the telemetry data
         self.init_ui()
         # Optionally start the telemetry data updates here if not started within init_ui
+
 
     def init_ui(self):
         # Remove logo
