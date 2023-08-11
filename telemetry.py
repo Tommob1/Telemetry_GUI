@@ -19,7 +19,7 @@ class TelemetryInterface:
 
         # Display logo
         self.logo()
-        self.window.after(2500, self.init_ui)
+        self.window.after(2500, self.start_menu)
         print("WINDOW STARTED")
 
     def logo(self):
@@ -44,6 +44,24 @@ class TelemetryInterface:
         # Make the cell span across the entire window
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
+
+    def start_menu(self):
+        # Display the 'Begin Simulation' button
+        self.begin_button = tk.Button(self.window, text="Begin Telemetry Simulation", command=self.begin_simulation,
+                                      fg="#00FF00", bg="black", font=("Courier", 24), borderwidth=0)
+        self.begin_button.grid(row=0, column=0, sticky='nsew')
+
+        # Make the button span across the entire window
+        self.window.grid_columnconfigure(0, weight=1)
+        self.window.grid_rowconfigure(0, weight=1)
+
+    def begin_simulation(self):
+        # Remove the 'Begin Simulation' button
+        self.begin_button.grid_remove()
+        
+        # Initialize the UI for the telemetry data
+        self.init_ui()
+        # Optionally start the telemetry data updates here if not started within init_ui
 
     def init_ui(self):
         # Remove logo
