@@ -46,6 +46,8 @@ class TelemetryInterface:
         self.window.grid_rowconfigure(0, weight=1)
 
     def start_menu(self):
+        self.logo_label.grid_forget()
+        
         # Frame to contain the buttons
         self.button_frame = tk.Frame(self.window, bg="black")
         self.button_frame.place(relx=0.5, rely=0.5, anchor='center')
@@ -80,10 +82,9 @@ class TelemetryInterface:
 
         # Replace the placeholders with your actual details
         details = {
-            "Name": "Your Name",
-            "Phone": "Your Phone Number",
-            "Email": "Your Email",
-            "LinkedIn": "Your LinkedIn Profile"
+            "For More Information\n\n"
+            "Name": "Brayden Tomlinson",
+            "Email": "btommowork@gmail.com",
         }
 
         row = 0
