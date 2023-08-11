@@ -95,7 +95,6 @@ class TelemetryInterface:
         back_button = tk.Button(self.info_frame, text="Back", command=self.back_to_main, font=("Courier", 16), bg="#00FF00")
         back_button.grid(row=row, column=0, pady=20)
 
-
     def back_to_main(self):
         """Return to the main screen."""
         # Remove the information frame
@@ -109,7 +108,6 @@ class TelemetryInterface:
         # Initialize the UI for the telemetry data
         self.init_ui()
         # Optionally start the telemetry data updates here if not started within init_ui
-
 
     def init_ui(self):
         # Remove logo
