@@ -48,7 +48,8 @@ class TelemetryInterface:
         self.window.grid_rowconfigure(0, weight=1)
 
     def start_menu(self):
-        self.logo_label.grid_forget()
+        if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
+            self.logo_label.grid_forget()
         
         # Frame to contain the buttons
         self.button_frame = tk.Frame(self.window, bg="black")
