@@ -17,6 +17,8 @@ class TelemetryInterface:
         self.window.configure(background="black")
         self.window.attributes('-fullscreen', True)
 
+        self.telemetry_active = False
+
         # Display logo
         self.logo()
         self.window.after(2500, self.start_menu)
@@ -108,7 +110,7 @@ class TelemetryInterface:
         self.button_frame.place_forget()
         # Initialize the UI for the telemetry data
         self.init_ui()
-        # Optionally start the telemetry data updates here if not started within init_ui
+        self.telemetry_active = True
 
     def init_ui(self):
         # Remove logo
@@ -245,7 +247,7 @@ class TelemetryInterface:
             self.timer_label.config(text=time_str)
 
             # Schedule the function to run after 1 second
-            self.window.after(1000, self.countdown)
+            self.countdown_id = self.window.after(1000, self.countdown)
 
             # Decrement the remaining time
             self.remaining_time -= 1
@@ -270,6 +272,10 @@ class TelemetryInterface:
             self.update_telemetry_data(self.simulation_start_time)
 
     def update_telemetry_data(self, simulation_time):
+        # Stop updating if telemetry is not active
+        if not self.telemetry_active:
+            return
+
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
@@ -360,13 +366,23 @@ class TelemetryInterface:
         self.canvas.draw()
 
     def return_to_menu(self):
-        # Hide telemetry-related widgets
-        self.window.after_cancel(self.telemetry_update_id)
+        self.telemetry_active = False
+        # Cancel scheduled updates if necessary
+        if hasattr(self, 'telemetry_update_id'):
+            self.window.after_cancel(self.telemetry_update_id)
+        if hasattr(self, 'countdown_id'):
+            self.window.after_cancel(self.countdown_id)
+    
+        # Start the main menu again
+        self.start_menu()
+    
+        # Hide and destroy telemetry-related widgets
         self.menu_button.place_forget()
         self.canvas.get_tk_widget().pack_forget()
         for widget in self.window.winfo_children():
-            widget.destroy()
-        self.start_menu()
+            if widget != self.button_frame:  # Make sure not to destroy the start menu you just displayed.
+                widget.destroy()
+
 
 window = tk.Tk()
 app = TelemetryInterface(window)
