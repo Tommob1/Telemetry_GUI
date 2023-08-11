@@ -72,11 +72,11 @@ class TelemetryInterface:
     def show_information(self):
         """Display personal information within the main window."""
         # Remove the buttons frame
-        self.button_frame.grid_remove()
+        self.button_frame.place_forget()
 
         # New frame to contain the information
         self.info_frame = tk.Frame(self.window, bg="black")
-        self.info_frame.grid(row=0, column=0, sticky='nsew', padx=200, pady=100)
+        self.info_frame.place(relx=0.5, rely=0.5, anchor='center')
 
         # Replace the placeholders with your actual details
         details = {
@@ -99,13 +99,13 @@ class TelemetryInterface:
     def back_to_main(self):
         """Return to the main screen."""
         # Remove the information frame
-        self.info_frame.grid_remove()
+        self.info_frame.place_forget()
         # Show the buttons frame again
-        self.button_frame.grid()
+        self.start_menu()
 
     def begin_simulation(self):
         # Remove the menu (button frame in this case)
-        self.button_frame.grid_remove()
+        self.button_frame.place_forget()
         # Initialize the UI for the telemetry data
         self.init_ui()
         # Optionally start the telemetry data updates here if not started within init_ui
