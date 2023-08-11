@@ -195,6 +195,12 @@ class TelemetryInterface:
             self.window.grid_rowconfigure(i, weight=1)
             self.window.grid_columnconfigure(i, weight=1)
 
+        # Add the "Menu" button to the bottom-left corner
+        self.menu_button = tk.Button(self.window, text="Menu",
+                                     command=self.return_to_menu,
+                                     fg="#FFFFFF", bg="#333333", font=("Courier", 12))
+        self.menu_button.place(x=10, y=self.window.winfo_height() - 40)
+
         # Time and data lists
         self.times = []
         self.altitudes = []
@@ -263,7 +269,6 @@ class TelemetryInterface:
             # Start the telemetry data function
             self.update_telemetry_data(self.simulation_start_time)
 
-
     def update_telemetry_data(self, simulation_time):
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
@@ -298,7 +303,7 @@ class TelemetryInterface:
             self.update_ui(altitude, velocity, fuel)
             
 			# Schedule the next update
-            self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
+            self.telemetry_update_id = self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
         else:
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
             print("SIMULATION COMPLETE")
@@ -353,6 +358,15 @@ class TelemetryInterface:
 
 
         self.canvas.draw()
+
+    def return_to_menu(self):
+        # Hide telemetry-related widgets
+        self.window.after_cancel(self.telemetry_update_id)
+        self.menu_button.place_forget()
+        self.canvas.get_tk_widget().pack_forget()
+        for widget in self.window.winfo_children():
+            widget.destroy()
+        self.start_menu()
 
 window = tk.Tk()
 app = TelemetryInterface(window)
