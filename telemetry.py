@@ -113,8 +113,10 @@ class TelemetryInterface:
         self.telemetry_active = True
 
     def init_ui(self):
-        # Remove logo
-        self.logo_label.grid_remove()
+
+        # Remove logo if it exists
+        if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
+            self.logo_label.grid_remove()
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
