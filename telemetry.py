@@ -214,9 +214,6 @@ class TelemetryInterface:
 
         self.simulation_start_time = time.time() # Stores the simulation start time
 
-        # Update function launched in a new thread
-        #self.window.after(0, lambda: self.update_telemetry_data(self.simulation_start_time))
-
         # Initialize the timer label for the countdown
         self.timer_label = tk.Label(frame_labels, text="T- 00:00:10", fg="#00FF00", bg="black", font=("Courier", 30))
         self.timer_label.grid(row=0, column=0, sticky="w", padx=5, pady=10)
