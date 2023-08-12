@@ -386,7 +386,6 @@ class TelemetryInterface:
             if widget != self.button_frame:  # Make sure not to destroy the start menu you just displayed.
                 widget.destroy()
 
-
 window = tk.Tk()
 app = TelemetryInterface(window)
 window.mainloop()
