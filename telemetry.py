@@ -213,7 +213,7 @@ class TelemetryInterface:
         # Add the "Menu" button to the bottom-left corner
         self.menu_button = tk.Button(self.window, text="Menu",
                                      command=self.return_to_menu,
-                                     fg="#00FF00", bg="black", font=("Courier", 12), borderwidth=0)
+                                     fg="#00FF00", bg="black", font=("Courier", 15), borderwidth=0)
         self.menu_button.place(x=10, y=self.window.winfo_height() - 40)
 
         # Mouse hover effect
