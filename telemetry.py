@@ -216,7 +216,6 @@ class TelemetryInterface:
                                      fg="#00FF00", bg="black", font=("Courier", 15), borderwidth=0)
         self.menu_button.place(x=10, y=self.window.winfo_height() - 40)
 
-        
         def map1(self):
             # Get directory
             script_dir = os.path.dirname(os.path.realpath(__file__))
