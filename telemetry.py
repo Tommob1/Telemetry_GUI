@@ -47,6 +47,23 @@ class TelemetryInterface:
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
 
+    def map1(self):
+        # Get directory
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+
+        map1_path = os.path.join(script_dir, 'Sat_Image.png')
+        map1 = Image.open(map1_path)
+
+        width = 400
+        height = 300
+
+        map1 = map1.resize((width, height), Image.LANCZOS)
+        map1_image = ImageTk.PhotoImage(map1)
+        
+        self.map1_label = tk.Label(self.window, image=map1_image, borderwidth=0, bg="black")
+        self.map1_label.image = map1_image
+
+
     def start_menu(self):
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_forget()
