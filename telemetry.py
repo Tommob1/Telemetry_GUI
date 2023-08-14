@@ -70,6 +70,11 @@ class TelemetryInterface:
                                      fg="#FF0000", bg="black", font=("Courier", 20), borderwidth=0)
         self.exit_button.pack(pady=20)
 
+        # Mouse hover effect
+        for btn in [self.begin_button, self.info_button, self.exit_button]:
+            btn.bind("<Enter>", lambda e, b=btn: b.config(bg="#525252"))
+            btn.bind("<Leave>", lambda e, b=btn: b.config(bg="black"))
+
         # Configure grid for the button frame
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_rowconfigure(0, weight=1)
@@ -98,6 +103,11 @@ class TelemetryInterface:
         # Back button to return to the main screen
         back_button = tk.Button(self.info_frame, text="Back", command=self.back_to_main, font=("Courier", 16), bg="#00FF00")
         back_button.grid(row=row, column=0, pady=20)
+
+        # Mouse hover effect
+        for btn in [back_button]:
+            btn.bind("<Enter>", lambda e, b=btn: b.config(bg="#525252"))
+            btn.bind("<Leave>", lambda e, b=btn: b.config(bg="#00FF00"))
 
     def back_to_main(self):
         """Return to the main screen."""
