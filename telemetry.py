@@ -216,6 +216,11 @@ class TelemetryInterface:
                                      fg="#00FF00", bg="black", font=("Courier", 12), borderwidth=0)
         self.menu_button.place(x=10, y=self.window.winfo_height() - 40)
 
+        # Mouse hover effect
+        for btn in [self.menu_button]:
+            btn.bind("<Enter>", lambda e, b=btn: b.config(bg="#525252"))
+            btn.bind("<Leave>", lambda e, b=btn: b.config(bg="black"))
+
         # Time and data lists
         self.times = []
         self.altitudes = []
