@@ -147,7 +147,6 @@ class TelemetryInterface:
         self.map1_canvas.create_image(2, 2, anchor=tk.NW, image=map1_image)
         self.map1_canvas.image = map1_image
 
-
     def init_ui(self):
 
         # Remove logo if it exists
