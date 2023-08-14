@@ -123,11 +123,30 @@ class TelemetryInterface:
         self.init_ui()
         self.telemetry_active = True
 
+    def map1(self):
+        # Get directory
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+
+        map1_path = os.path.join(script_dir, 'Sat_Image.png')
+        map1 = Image.open(map1_path)
+
+        width = 400
+        height = 300
+
+        map1 = map1.resize((width, height), Image.LANCZOS)
+        map1_image = ImageTk.PhotoImage(map1)
+
+        self.map1_label = tk.Label(self.window, image=map1_image, borderwidth=0, bg="black")
+        self.map1_label.place(x=10, y=self.window.winfo_height() - 40 - 300)
+        self.map1_label.image = map1_image
+
     def init_ui(self):
 
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_remove()
+
+        self.map1()
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
@@ -216,23 +235,6 @@ class TelemetryInterface:
                                      fg="#00FF00", bg="black", font=("Courier", 15), borderwidth=0)
         self.menu_button.place(x=10, y=self.window.winfo_height() - 40)
 
-        def map1(self):
-            # Get directory
-            script_dir = os.path.dirname(os.path.realpath(__file__))
-
-            map1_path = os.path.join(script_dir, 'Sat_Image.png')
-            map1 = Image.open(map1_path)
-
-            width = 400
-            height = 300
-
-            map1 = map1.resize((width, height), Image.LANCZOS)
-            map1_image = ImageTk.PhotoImage(map1)
-        
-            self.map1_label = tk.Label(self.window, image=map1_image, borderwidth=0, bg="black")
-            self.map1_label.image = map1_image
-
-
         # Mouse hover effect
         for btn in [self.menu_button]:
             btn.bind("<Enter>", lambda e, b=btn: b.config(bg="#525252"))
@@ -261,6 +263,7 @@ class TelemetryInterface:
         self.countdown()
 
     def countdown(self):
+        self.map1()
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
             mins, sec = divmod(self.remaining_time, 60)
@@ -352,6 +355,8 @@ class TelemetryInterface:
         self.altitudes.append(altitude)
         self.velocities.append(velocity)
         self.fuels.append(fuel)
+
+        self.map1()
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
 
