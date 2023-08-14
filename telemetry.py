@@ -136,9 +136,17 @@ class TelemetryInterface:
         map1 = map1.resize((width, height), Image.LANCZOS)
         map1_image = ImageTk.PhotoImage(map1)
 
-        self.map1_label = tk.Label(self.window, image=map1_image, borderwidth=0, bg="black")
-        self.map1_label.place(x=20, y=400)
-        self.map1_label.image = map1_image
+        # Create a canvas with size of the image plus the border
+        canvas_width = width + 4  # 2px border on each side
+        canvas_height = height + 4  # 2px border on each side
+
+        self.map1_canvas = tk.Canvas(self.window, width=canvas_width, height=canvas_height, bg='green', highlightthickness=0)
+        self.map1_canvas.place(x=20, y=400)
+
+        # Place the image inside the canvas
+        self.map1_canvas.create_image(2, 2, anchor=tk.NW, image=map1_image)
+        self.map1_canvas.image = map1_image
+
 
     def init_ui(self):
 
