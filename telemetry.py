@@ -130,14 +130,14 @@ class TelemetryInterface:
         map1_path = os.path.join(script_dir, 'Sat_Image.png')
         map1 = Image.open(map1_path)
 
-        width = 400
-        height = 300
+        width = 900
+        height = 600
 
         map1 = map1.resize((width, height), Image.LANCZOS)
         map1_image = ImageTk.PhotoImage(map1)
 
         self.map1_label = tk.Label(self.window, image=map1_image, borderwidth=0, bg="black")
-        self.map1_label.place(x=10, y=self.window.winfo_height() - 40 - 300)
+        self.map1_label.place(x=20, y=400)
         self.map1_label.image = map1_image
 
     def init_ui(self):
