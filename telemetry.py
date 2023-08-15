@@ -155,14 +155,15 @@ class TelemetryInterface:
             self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
     def move_dot(self):
-        # Increment the x-coordinate
-        self.dot_x += 5  # adjust this value to move the dot faster or slower
+        if hasattr(self, 'map1_canvas'):
+            # Increment the x-coordinate
+            self.dot_x += 5  # adjust this value to move the dot faster or slower
 
-        # Update the dot's position
-        self.add_dot(self.dot_x, self.dot_y)
+            # Update the dot's position
+            self.add_dot(self.dot_x, self.dot_y)
 
-        # Schedule move_dot to run again after 100 milliseconds
-        self.window.after(100, self.move_dot)
+            # Schedule move_dot to run again after 100 milliseconds
+            self.window.after(100, self.move_dot)
 
     def init_ui(self):
         # Remove logo if it exists
@@ -288,7 +289,6 @@ class TelemetryInterface:
 
     def countdown(self):
         self.map1()
-
 
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
