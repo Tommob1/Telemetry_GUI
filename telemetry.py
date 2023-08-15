@@ -126,6 +126,7 @@ class TelemetryInterface:
     def map1(self):
         # Get directory
         script_dir = os.path.dirname(os.path.realpath(__file__))
+
         map1_path = os.path.join(script_dir, 'Sat_Image.png')
         map1 = Image.open(map1_path)
 
@@ -133,18 +134,22 @@ class TelemetryInterface:
         height = 600
 
         map1 = map1.resize((width, height), Image.LANCZOS)
-        self.map1_image_tk = ImageTk.PhotoImage(map1)
+        map1_image = ImageTk.PhotoImage(map1)
 
-        # Create a canvas for the map image
-        self.map1_canvas = tk.Canvas(self.window, width=width, height=height, bg="black", highlightthickness=0)
+        # Create a canvas with size of the image plus the border
+        canvas_width = width + 4  # 2px border on each side
+        canvas_height = height + 4  # 2px border on each side
+
+        self.map1_canvas = tk.Canvas(self.window, width=canvas_width, height=canvas_height, bg='green', highlightthickness=0)
         self.map1_canvas.place(x=20, y=400)
 
-        # Display the map image on the canvas
-        self.map1_canvas.create_image(0, 0, anchor=tk.NW, image=self.map1_image_tk)
+        # Place the image inside the canvas
+        self.map1_canvas.create_image(2, 2, anchor=tk.NW, image=map1_image)
+        self.map1_canvas.image = map1_image
 
     def add_dot(self, x, y):
         dot_radius = 3
-        self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='red')
+        self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
 
     def init_ui(self):
@@ -152,8 +157,6 @@ class TelemetryInterface:
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_remove()
-
-        self.map1()
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
@@ -271,6 +274,7 @@ class TelemetryInterface:
 
     def countdown(self):
         self.map1()
+        self.add_dot(345, 300)
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
             mins, sec = divmod(self.remaining_time, 60)
@@ -364,7 +368,7 @@ class TelemetryInterface:
         self.fuels.append(fuel)
 
         self.map1()
-        self.add_dot(100, 100)
+        self.add_dot(345, 300)
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
 
