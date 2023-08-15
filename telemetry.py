@@ -149,14 +149,28 @@ class TelemetryInterface:
 
     def add_dot(self, x, y):
         dot_radius = 3
-        self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
+        if hasattr(self, 'dot'):
+            self.map1_canvas.coords(self.dot, x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius)
+        else:
+            self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
+    def move_dot(self):
+        # Increment the x-coordinate
+        self.dot_x += 5  # adjust this value to move the dot faster or slower
+
+        # Update the dot's position
+        self.add_dot(self.dot_x, self.dot_y)
+
+        # Schedule move_dot to run again after 100 milliseconds
+        self.window.after(100, self.move_dot)
 
     def init_ui(self):
-
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_remove()
+
+        self.dot_x = 345
+        self.dot_y = 300
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
@@ -274,7 +288,8 @@ class TelemetryInterface:
 
     def countdown(self):
         self.map1()
-        self.add_dot(345, 300)
+
+
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
             mins, sec = divmod(self.remaining_time, 60)
@@ -368,7 +383,7 @@ class TelemetryInterface:
         self.fuels.append(fuel)
 
         self.map1()
-        self.add_dot(345, 300)
+        self.move_dot()
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
 
