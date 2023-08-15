@@ -364,7 +364,7 @@ class TelemetryInterface:
         self.fuels.append(fuel)
 
         self.map1()
-
+        
         elapsed_time = timedelta(seconds=int(self.times[-1]))
 
         # Update the T+ timer on the UI
