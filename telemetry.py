@@ -163,15 +163,13 @@ class TelemetryInterface:
             self.add_dot(self.dot_x, self.dot_y)
 
             # Schedule move_dot to run again after 100 milliseconds
-            self.window.after(100, self.move_dot)
+            if self.dot_x < 900:
+                self.window.after(100, self.move_dot)
 
     def init_ui(self):
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_remove()
-
-        self.dot_x = 345
-        self.dot_y = 300
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
@@ -289,6 +287,7 @@ class TelemetryInterface:
 
     def countdown(self):
         self.map1()
+        self.add_dot(345, 300)
 
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
@@ -382,7 +381,6 @@ class TelemetryInterface:
         self.velocities.append(velocity)
         self.fuels.append(fuel)
 
-        self.map1()
         self.move_dot()
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
