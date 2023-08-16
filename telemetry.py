@@ -155,7 +155,7 @@ class TelemetryInterface:
             self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
     def move_dot(self):
-        if hasattr(self, 'map1_canvas') and hasattr(self, 'dot_x') and hasattr(self, 'dot_y'):
+        if hasattr(self, 'map1_canvas'):
             # Increment the x-coordinate
             self.dot_x += 5  # adjust this value to move the dot faster or slower
 
@@ -163,18 +163,15 @@ class TelemetryInterface:
             self.add_dot(self.dot_x, self.dot_y)
 
             # Schedule move_dot to run again after 100 milliseconds
-            if self.dot_x < 900:
-                self.window.after(100, self.move_dot)
+            self.window.after(100, self.move_dot)
 
     def init_ui(self):
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
             self.logo_label.grid_remove()
 
-        # Start map and add dot
-        self.map1()
-        self.add_dot(345, 300)
-
+        self.dot_x = 345
+        self.dot_y = 300
 
         # Set general settings for all the labels
         settings = {"fg": "#00FF00", "bg": "black", "font": ("Courier", 20)}
@@ -291,7 +288,7 @@ class TelemetryInterface:
         self.countdown()
 
     def countdown(self):
-        self.add_dot(345, 300)
+        self.map1()
 
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
@@ -334,9 +331,6 @@ class TelemetryInterface:
 
             # Start the telemetry data function
             self.update_telemetry_data(self.simulation_start_time)
-
-            # Start moving the dot
-            self.move_dot()
 
     def update_telemetry_data(self, simulation_time):
         # Stop updating if telemetry is not active
@@ -388,6 +382,7 @@ class TelemetryInterface:
         self.velocities.append(velocity)
         self.fuels.append(fuel)
 
+        self.map1()
         self.move_dot()
 
         elapsed_time = timedelta(seconds=int(self.times[-1]))
