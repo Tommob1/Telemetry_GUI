@@ -140,12 +140,19 @@ class TelemetryInterface:
         canvas_width = width + 4  # 2px border on each side
         canvas_height = height + 4  # 2px border on each side
 
+        # Before creating a new canvas, reset the dot attribute
+        if hasattr(self, 'dot'):
+            del self.dot
+
         self.map1_canvas = tk.Canvas(self.window, width=canvas_width, height=canvas_height, bg='green', highlightthickness=0)
         self.map1_canvas.place(x=20, y=400)
 
         # Place the image inside the canvas
         self.map1_canvas.create_image(2, 2, anchor=tk.NW, image=map1_image)
         self.map1_canvas.image = map1_image
+
+        # Add the dot at starting location
+        self.add_dot(345, 300)
 
     def add_dot(self, x, y):
         dot_radius = 3
@@ -286,7 +293,6 @@ class TelemetryInterface:
 
     def countdown(self):
         self.map1()
-        self.add_dot(345, 300)
 
         if self.remaining_time >= 0:
             # Convert the remaining time into HH:MM:SS format
@@ -338,6 +344,8 @@ class TelemetryInterface:
         if time.time() - simulation_time <= 60:  # Run for 2 minutes
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
+
+            self.move_dot
 
             # Update Vehicle Status Messages
             if round(elapsed_time) == 2:
