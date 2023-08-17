@@ -179,7 +179,7 @@ class TelemetryInterface:
             self.add_dot(self.dot_x, self.dot_y)
 
             # Schedule move_dot to run again after 100 milliseconds
-            self.window.after(100, self.move_dot)
+            self.move_dot_id = self.window.after(100, self.move_dot)
 
 
     def init_ui(self):
@@ -387,6 +387,8 @@ class TelemetryInterface:
             
 			# Schedule the next update
             self.telemetry_update_id = self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
+        elif hasattr(self, 'move_dot_id'):
+            self.window.after_cancel(self.move_dot_id)
         else:
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
             print("SIMULATION COMPLETE")
