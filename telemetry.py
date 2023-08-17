@@ -19,6 +19,9 @@ class TelemetryInterface:
 
         self.telemetry_active = False
 
+        self.dot_x = 345
+        self.dot_y = 300
+
         # Display logo
         self.logo()
         self.window.after(2500, self.start_menu)
@@ -163,14 +166,21 @@ class TelemetryInterface:
 
     def move_dot(self):
         if hasattr(self, 'map1_canvas'):
-            # Increment the x-coordinate
-            self.dot_x += 5  # adjust this value to move the dot faster or slower
+            # Delete the existing dot from the canvas
+            if hasattr(self, 'dot'):
+                self.map1_canvas.delete(self.dot)
+                del self.dot
+
+            # Increment the xy-coordinates
+            self.dot_x += 0.0015  # adjust this value to move the dot faster or slower
+            self.dot_y -= 0.0005
 
             # Update the dot's position
             self.add_dot(self.dot_x, self.dot_y)
 
             # Schedule move_dot to run again after 100 milliseconds
             self.window.after(100, self.move_dot)
+
 
     def init_ui(self):
         # Remove logo if it exists
@@ -345,7 +355,7 @@ class TelemetryInterface:
             elapsed_time = time.time() - simulation_time
             elapsed_percent = elapsed_time / 60  # Percentage of the launch time that has elapsed
 
-            self.move_dot
+            self.move_dot()
 
             # Update Vehicle Status Messages
             if round(elapsed_time) == 2:
