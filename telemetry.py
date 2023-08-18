@@ -165,7 +165,7 @@ class TelemetryInterface:
             self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
     def move_dot(self):
-        if hasattr(self, 'map1_canvas'):
+        if hasattr(self, 'map1_canvas') and hasattr(self, 'dot'):
             # Delete the existing dot from the canvas
             if hasattr(self, 'dot'):
                 self.map1_canvas.delete(self.dot)
@@ -387,9 +387,8 @@ class TelemetryInterface:
             
 			# Schedule the next update
             self.telemetry_update_id = self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
-        elif hasattr(self, 'move_dot_id'):
-            self.window.after_cancel(self.move_dot_id)
         else:
+            self.window.after_cancel(self.move_dot_id)
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
             print("SIMULATION COMPLETE")
 
@@ -453,6 +452,8 @@ class TelemetryInterface:
             self.window.after_cancel(self.telemetry_update_id)
         if hasattr(self, 'countdown_id'):
             self.window.after_cancel(self.countdown_id)
+        if hasattr(self, 'move_dot_id'):
+            self.window.after_cancel(self.move_dot_id)
     
         # Start the main menu again
         self.start_menu()
