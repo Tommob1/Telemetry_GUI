@@ -165,7 +165,7 @@ class TelemetryInterface:
             self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
     def move_dot(self):
-        if hasattr(self, 'map1_canvas') and hasattr(self, 'dot'):
+        if hasattr(self, 'map1_canvas') and hasattr(self, 'dot') and self.map1_canvas.winfo_exists():
             # Delete the existing dot from the canvas
             if hasattr(self, 'dot'):
                 self.map1_canvas.delete(self.dot)
