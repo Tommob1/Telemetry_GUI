@@ -141,8 +141,8 @@ class TelemetryInterface:
         map1_image = ImageTk.PhotoImage(map1)
 
         # Create a canvas with size of the image plus the border
-        canvas_width = width + 4  # 2px border on each side
-        canvas_height = height + 4  # 2px border on each side
+        canvas_width = width + 4
+        canvas_height = height + 4
 
         # Before creating a new canvas, reset the dot attribute
         if hasattr(self, 'dot'):
