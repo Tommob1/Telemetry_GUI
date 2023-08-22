@@ -159,7 +159,7 @@ class TelemetryInterface:
         self.add_dot(345, 300)
 
     def add_dot(self, x, y):
-        dot_radius = 5
+        dot_radius = 3
         if hasattr(self, 'dot'):
             self.map1_canvas.coords(self.dot, x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius)
         else:
@@ -175,6 +175,9 @@ class TelemetryInterface:
             # Increment the xy-coordinates
             self.dot_x += 0.0015  # adjust this value to move the dot faster or slower
             self.dot_y -= 0.0005
+
+            # Draw a line segment connecting the current and previous positions
+            self.map1_canvas.create_line(345, 300, self.dot_x, self.dot_y, fill='#00FF00')
 
             # Update the dot's position
             self.add_dot(self.dot_x, self.dot_y)
