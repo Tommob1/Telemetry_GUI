@@ -159,7 +159,7 @@ class TelemetryInterface:
         self.add_dot(345, 300)
 
     def add_dot(self, x, y):
-        dot_radius = 3
+        dot_radius = 5
         if hasattr(self, 'dot'):
             self.map1_canvas.coords(self.dot, x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius)
         else:
