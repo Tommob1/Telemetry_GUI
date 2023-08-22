@@ -173,8 +173,8 @@ class TelemetryInterface:
                 del self.dot
 
             # Increment the xy-coordinates
-            self.dot_x += 0.0015  # adjust this value to move the dot faster or slower
-            self.dot_y -= 0.0005
+            self.dot_x += 0.0025  # adjust this value to move the dot faster or slower
+            self.dot_y -= 0.0015
 
             # Draw a line segment connecting the current and previous positions
             self.map1_canvas.create_line(345, 300, self.dot_x, self.dot_y, fill='#00FF00')
