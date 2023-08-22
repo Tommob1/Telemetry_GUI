@@ -388,7 +388,6 @@ class TelemetryInterface:
 			# Schedule the next update
             self.telemetry_update_id = self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
         else:
-            self.window.after_cancel(self.move_dot_id)
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
             print("SIMULATION COMPLETE")
 
