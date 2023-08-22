@@ -18,6 +18,7 @@ class TelemetryInterface:
         self.window.attributes('-fullscreen', True)
 
         self.telemetry_active = False
+        self.move_dot_check = True
 
         self.dot_x = 345
         self.dot_y = 300
@@ -165,7 +166,7 @@ class TelemetryInterface:
             self.dot = self.map1_canvas.create_oval(x-dot_radius, y-dot_radius, x+dot_radius, y+dot_radius, fill='#00FF00')
 
     def move_dot(self):
-        if hasattr(self, 'map1_canvas') and hasattr(self, 'dot') and self.map1_canvas.winfo_exists():
+        if self.move_dot_check and hasattr(self, 'map1_canvas') and hasattr(self, 'dot') and self.map1_canvas.winfo_exists():
             # Delete the existing dot from the canvas
             if hasattr(self, 'dot'):
                 self.map1_canvas.delete(self.dot)
@@ -389,6 +390,7 @@ class TelemetryInterface:
             self.telemetry_update_id = self.window.after(10, lambda: self.update_telemetry_data(simulation_time))
         else:
             self.staging_label.config(text="STAGE SEPARATION CONFIRMED")
+            self.move_dot_check = False
             print("SIMULATION COMPLETE")
 
     def update_ui(self, altitude, velocity, fuel):
