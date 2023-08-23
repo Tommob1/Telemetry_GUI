@@ -20,8 +20,8 @@ class TelemetryInterface:
         self.telemetry_active = False
         self.move_dot_check = True
 
-        self.dot_x = 345
-        self.dot_y = 300
+        self.dot_x = 405
+        self.dot_y = 330
 
         # Display logo
         self.logo()
@@ -156,7 +156,7 @@ class TelemetryInterface:
         self.map1_canvas.image = map1_image
 
         # Add the dot at starting location
-        self.add_dot(345, 300)
+        self.add_dot(405, 330)
 
     def add_dot(self, x, y):
         dot_radius = 3
@@ -173,11 +173,11 @@ class TelemetryInterface:
                 del self.dot
 
             # Increment the xy-coordinates
-            self.dot_x += 0.0025  # adjust this value to move the dot faster or slower
-            self.dot_y -= 0.0015
+            self.dot_x += 0.0050  # adjust this value to move the dot faster or slower
+            self.dot_y -= 0.0030
 
             # Draw a line segment connecting the current and previous positions
-            self.map1_canvas.create_line(345, 300, self.dot_x, self.dot_y, fill='#00FF00')
+            self.map1_canvas.create_line(405, 330, self.dot_x, self.dot_y, fill='#00FF00')
 
             # Update the dot's position
             self.add_dot(self.dot_x, self.dot_y)
