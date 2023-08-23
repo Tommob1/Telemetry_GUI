@@ -185,7 +185,6 @@ class TelemetryInterface:
             # Schedule move_dot to run again after 100 milliseconds
             self.move_dot_id = self.window.after(100, self.move_dot)
 
-
     def init_ui(self):
         # Remove logo if it exists
         if hasattr(self, 'logo_label') and self.logo_label.winfo_exists():
