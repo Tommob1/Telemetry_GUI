@@ -174,7 +174,7 @@ class TelemetryInterface:
 
             # Increment the xy-coordinates
             self.dot_x += 0.0025  # adjust this value to move the dot faster or slower
-            self.dot_y -= 0.015
+            self.dot_y -= 0.0015
 
             # Draw a line segment connecting the current and previous positions
             self.map1_canvas.create_line(345, 300, self.dot_x, self.dot_y, fill='#00FF00')
@@ -231,11 +231,6 @@ class TelemetryInterface:
         self.altitude_graph = self.fig.add_subplot(311)
         self.velocity_graph = self.fig.add_subplot(312)
         self.fuel_graph = self.fig.add_subplot(313)
-
-        # Insert the new lines here to adjust subplot positions
-        self.altitude_graph.set_position([0.1, 0.7, 0.8, 0.2])  # [left, bottom, width, height]
-        self.velocity_graph.set_position([0.1, 0.4, 0.8, 0.2])
-        self.fuel_graph.set_position([0.1, 0.1, 0.8, 0.2])
 
         self.altitude_graph.set_facecolor('black')
         self.velocity_graph.set_facecolor('black')
