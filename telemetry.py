@@ -212,6 +212,9 @@ class TelemetryInterface:
         self.staging_label = tk.Label(frame_labels, text="", fg="#00FF00", bg="black", font=("Courier", 25))
         self.staging_label.grid(row=2, column=4, columnspan=2, sticky="w", padx=5, pady=10)
 
+        self.telemetry_label = tk.Label(frame_labels, text="Stage 1 Telemetry", bg="black", font=("Courier", 25))
+        self.telemetry_label.grid(row=6, column=0, sticky="w", padx=5, pady=0)
+
         # Spacecraft Status static label
         self.status_label_static = tk.Label(frame_labels, text="Vehicle Status:", fg="#00FF00", bg="black", font=("Courier", 23))
         self.status_label_static.grid(row=0, column=4, sticky="w", padx=5, pady=10)
